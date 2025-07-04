@@ -128,7 +128,6 @@ export class CardsPropertiesComponent implements OnInit {
         
       })
     ).subscribe(data => {
-      console.log(data)
       this.properties = data;
    
       this.loading = false;
