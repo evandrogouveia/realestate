@@ -23,7 +23,6 @@ export class AboutUsComponent implements OnInit {
           })
         ).subscribe(data => {
       this.quemSomos = data;
-      console.log(data)
     })
   }
 
