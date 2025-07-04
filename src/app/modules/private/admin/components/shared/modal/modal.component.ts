@@ -21,6 +21,4 @@ export class ModalComponent implements OnInit {
     this.bsModalRef.hide();
   }
 
-  
-
 }
