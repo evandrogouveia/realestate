@@ -20,5 +20,6 @@ export class ModalComponent implements OnInit {
     this.bsModalRef.content.callback(true);//emite um evento callback true para o modal
     this.bsModalRef.hide();
   }
+  
 
 }
