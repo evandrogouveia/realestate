@@ -1,0 +1,42 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <button class="btn btn-light" id="menu-toggle" (click)="toggleSidebar()">
+      <img src="assets/img/icons/menu.svg">
+    </button>
+    <div class="box-logo">
+      <img src="assets/img/logoipsum-invert.svg">
+    </div>
+  </div><!-- /navbar-left -->
+
+  <div class="navbar-right">
+
+    <div class="profile-menu" dropdown>
+      <div class="button-drop" dropdownToggle aria-controls="dropdown-animated">
+        <div class="profile-img">
+          <img src="{{currentUser?.foto && currentUser?.foto !== 'undefined' ? currentUser?.foto : imageSrc}}" alt="foto">
+        </div>
+        <span class="username">{{currentUser?.nomeSocial}}</span>
+        <span class="down-arrow-header"></span>
+      </div>
+
+      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+        <li class="menuitem">
+          <p>Ações</p>
+        </li>
+        <li class="menuitem">
+          <a routerLink="/private/admin/edit-profile/{{currentUser?.ID}}">
+            <i class="icon-person-profile"></i>
+            <span>Meu perfil</span>
+          </a>
+        </li>
+        <li class="menuitem">
+          <a href="javascript:void(0);" (click)="logout()">
+            <i class="icon-sair"></i>
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div><!-- /navbar-right -->
+</nav>

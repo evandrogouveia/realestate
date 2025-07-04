@@ -1,0 +1,75 @@
+<section>
+    <div class="content-add-posts">
+        <div class="header-post">
+            <div class="wrap">
+                <h4>{{!this.isAddMode ? 'Editar Post' : 'Adicionar Post'}}</h4>
+            </div>
+        </div>
+
+        <form class="form-add-post" [formGroup]="addPostForm" (ngSubmit)="addUpdadePosts()">
+            <div class="row">
+                <div class="col-lg-9">
+
+                    <div class="form-group">
+                        <label for="name">Adicionar título</label>
+                        <input type="text" class="form-control" id="name" formControlName="titulo">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descrição</label>
+                        <angular-editor formControlName="descricao" [config]="config"></angular-editor>
+                    </div>
+
+                    <p *ngIf="!this.isAddMode" class="published-info">Publicado em: 
+                        <strong>
+                            {{dataPublicacao | date: 'dd'}} de 
+                            {{dataPublicacao | date: 'MMMM'}} de 
+                            {{dataPublicacao | date: 'YYYY'}} às 
+                            {{dataPublicacao | date: 'HH:mm'}} 
+                        </strong>
+                    </p>
+                </div>
+                <div class="col-lg-3">
+
+                    <button type="submit" class="btn btn-save-form">
+                        <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
+                        {{!this.isAddMode && !loading ? 'Atualizar' : loading ? 'Aguarde...' : 'Publicar' }}
+                    </button>
+
+                    <div class="card">
+                        <div class="title-card">
+                            <p>Adicionar imagem principal</p>
+                        </div>
+                        <div class="card-body card-image">
+                            <div class="avatar">
+                                <img class="img-upload" [src]="highlightedImage" width="100%" height="200px"
+                                    alt="imagem-destacada" (click)="fileUploader.click()">
+                                <input type="file" #fileUploader accept="image/*" class="form-control" id="avatar"
+                                    aria-describedby="nome" placeholder="imagem" (change)="showPreviewImage($event)"
+                                    hidden>
+                            </div>
+                            <ng-container>
+                                <p>Clique sobre a imagem para substituí-la.</p>
+                                <!--a class="nav-link" href="#"><i class="icon-delete"></i> Remover
+                                    imagem principal</a-->
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="title-card">
+                            <p>Categorias</p>
+                        </div>
+                        <div class="card-body card-category-check">
+                            <div class="form-check" *ngFor="let c of categoriesAll$ | async; let i = index">
+                                <input #inputCategories type="checkbox" class="form-check-input" id="exampleCheck{{i}}" value="{{c.nome}}" (click)="checkCategory($event)">
+                                <label class="form-check-label" for="exampleCheck{{i}}">{{c.nome}}</label>
+                            </div>
+                            <hr>
+                            <a class="nav-link" routerLink="/private/admin/add-category">+ Adicionar nova categoria</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

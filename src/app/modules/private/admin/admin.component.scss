@@ -1,0 +1,25 @@
+#wrapper {
+    overflow-x: hidden;
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+        .content-admin{
+            padding: 90px 25px 10px 105px;
+            background-color: #f1f1f1;
+            min-height: 100vh;
+            position: relative;
+            -webkit-transition: padding .25s ease-out;
+            -moz-transition: padding .25s ease-out;
+            -o-transition: padding .25s ease-out;
+            transition: padding .25s ease-out;
+        }
+    }
+ }
+
+/* ============= MOBILE =================*/
+@media (max-width: 575px) { 
+    .content-perfil{
+        padding:50px 15px 90px;
+    }
+}
+

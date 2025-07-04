@@ -1,0 +1,200 @@
+<section>
+    <div class="content-edit-home">
+        <div class="header-title">
+            <div class="wrap">
+                <h4>Editar Home</h4>
+            </div>
+        </div>
+        <form class="form-areas" [formGroup]="homeForm" (ngSubmit)="addUpdateHome()">
+            <!-- ================================ SEÇÃO 1 ================================ -->
+            <div class="card card-edit">
+                <h5>Seção: 1</h5>
+                <ng-container formGroupName="secaoOne">
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="subtitulo">Subtitulo</label>
+                            <angular-editor formControlName="subtitulo" [config]="config">
+                            </angular-editor>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3" *ngFor="let c of [1,2,3,4]; let i = index">
+                            <div class="card card-f">
+                                <div class="title-card">
+                                    <p>Coluna {{i + 1}}</p>
+                                </div>
+                                <div class="card-body">
+                                    <ng-container formGroupName="coluna{{i + 1}}">
+                                        <label>Icone</label>
+                                        <div class="btn-group" dropdown>
+                                            <button id="button-basic" dropdownToggle type="button"
+                                                class="btn btn-custom-drop dropdown-toggle"
+                                                aria-controls="dropdown-basic">
+                                                <i
+                                                    class="{{homeForm.get('secaoOne').get('coluna' + c).controls['icone' + c].value}}"></i>
+                                                Selecionar <span class="caret"></span>
+                                            </button>
+                                            <div id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                                                aria-labelledby="button-basic">
+                                                <div *ngFor="let ico of icones" class="wrap-inputs-radio-hours">
+                                                    <label>
+
+                                                        <input type="radio" name="icone{{i + 1}}"
+                                                            class="card-input-radio" [value]="ico.class"
+                                                            formControlName="icone{{i + 1}}">
+                                                        <div class="card-horario">
+                                                            <i class='{{ico.class}}'></i>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tituloColuna{{i + 1}}">Título</label>
+                                            <input type="text" class="form-control" id="tituloColuna{{i + 1}}"
+                                                formControlName="tituloColuna{{i + 1}}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="descricaoColuna{{i + 1}}">Descrição</label>
+                                            <angular-editor id="descricaoColuna{{i + 1}}"
+                                                formControlName="descricaoColuna{{i + 1}}" [config]="config">
+                                            </angular-editor>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="linkColuna{{i + 1}}">Link</label>
+                                            <input type="text" class="form-control" id="linkarea1"
+                                                formControlName="linkColuna{{i + 1}}">
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </div>
+
+            <!-- ================================ SEÇÃO 2 ================================ -->
+            <div class="card card-edit">
+                <h5>Seção: 2</h5>
+                <ng-container formGroupName="secaoTwo">
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="subtitulo">Subtitulo</label>
+                            <angular-editor formControlName="subtitulo" [config]="config">
+                            </angular-editor>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="card card-columns mt-4">
+                                <div class="title-card">
+                                    <p>Grid</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <input type="radio" id="columnsone" name="gridSecao2" value="4" formControlName="gridSecao2"
+                                            [checked]="homeForm.get('secaoTwo').get('gridSecao2').value === '4'">
+                                            <label for="columnsone">3 Colunas</label>
+                                            <div class="columns">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <input type="radio" id="columnstwo" name="gridSecao2" value="3" formControlName="gridSecao2"
+                                                [checked]="homeForm.get('secaoTwo').get('gridSecao2').value === '3'">
+                                            <label for="columnstwo">4 Colunas</label>
+                                            <div class="columns">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+
+            </div>
+
+            <!-- ================================ SEÇÃO NOTICIAS ================================ -->
+            <div class="card card-edit">
+                <h5>Seção: Notícias</h5>
+                <ng-container formGroupName="secaoNoticias">
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="subtitulo">Subtitulo</label>
+                            <angular-editor formControlName="subtitulo" [config]="config">
+                            </angular-editor>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="card card-columns mt-4">
+                                <div class="title-card">
+                                    <p>Grid</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <input type="radio" id="columnstree" name="gridNoticias" value="4" formControlName="gridNoticias"
+                                                [checked]="homeForm.get('secaoNoticias').get('gridNoticias').value === '4'">
+                                            <label for="columnstree">3 Colunas</label>
+                                            <div class="columns">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <input type="radio" id="columnsfour" name="gridNoticias" value="3"
+                                                formControlName="gridNoticias"
+                                                [checked]="homeForm.get('secaoNoticias').get('gridNoticias').value === '3'">
+                                            <label for="columnsfour">4 Colunas</label>
+                                            <div class="columns">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,89 @@
+<app-entry-banner-pages [title]="'Fale conosco'"></app-entry-banner-pages>
+
+<section>
+    <div class="section-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="wrapper-form-contact">
+                        <p [innerHTML]="contato[0]?.titulo"></p>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nome</label>
+                                <input type="email" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telefone</label>
+                                <input type="text" class="form-control" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="text" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensagem</label>
+                                <textarea class="form-control" id="message" rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="wrapper-contacts">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="contact">
+                            <i class='{{contato[0]?.coluna1.icone1}}'></i>
+                            <h4>{{contato[0]?.coluna1.tituloColuna1}}</h4>
+                            <p>{{contato[0]?.coluna1.descricaoColuna1}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="contact">
+                            <i class='{{contato[0]?.coluna2.icone2}}'></i>
+                            <h4>{{contato[0]?.coluna2.tituloColuna2}}</h4>
+                            <p>{{contato[0]?.coluna2.descricaoColuna2}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="contact">
+                            <i class="{{contato[0]?.coluna3.icone3}}"></i>
+                            <h4>{{contato[0]?.coluna3.tituloColuna3}}</h4>
+                            <p>{{contato[0]?.coluna3.descricaoColuna3}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="contact">
+                            <i class='{{contato[0]?.coluna4.icone4}}'></i>
+                            <h4>{{contato[0]?.coluna4.tituloColuna4}}</h4>
+                            <p class="horary">{{contato[0]?.coluna4.descricaoColuna4}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-map">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                <ng-container *ngIf="contato.length > 0">
+                    <agm-marker 
+                    [latitude]="lat" 
+                    [longitude]="lng"
+                    [iconUrl]="'assets/img/custom-marker.png'"
+                    >
+                    <agm-info-window>
+                        <strong>
+                            Real Estate
+                        </strong>
+                      </agm-info-window>
+                </agm-marker>
+                </ng-container>
+            </agm-map>
+        </div>
+
+    </div>
+</section>

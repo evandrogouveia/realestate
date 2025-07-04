@@ -1,0 +1,122 @@
+<section>
+    <div class="content-edit-areas">
+        <div class="header-title">
+            <div class="wrap">
+                <h4>Adicionar/Editar Depoimentos</h4>
+            </div>
+        </div>
+
+        <div class="card card-edit card-background">
+            <div class="card-body">
+                <form class="form-areas" [formGroup]="addBackgroundDepoimentosForm" (ngSubmit)="addUpdadeBackgroundDepoimento()">
+                    <div class="header-form">
+                        <h5>Adicionar Imagem de fundo</h5>
+                        <div class="wrap-background">
+                            <div class="image-background">
+                                <img class="img-upload" [src]="imagemSrcBackground" width="100%" height="290px"
+                                    alt="imagem-upload" (click)="fileUploaderBackground.click()">
+                                    <div class="box-icon-picture">
+                                        <p (click)="fileUploaderBackground.click()">Alterar imagem</p>
+                                    </div>
+                                <input type="file" #fileUploaderBackground accept="image/*" class="form-control"
+                                    id="avatar" aria-describedby="nome" placeholder="imagem"
+                                    (change)="showPreviewImageBackground($event)" hidden>
+                            </div>
+                            <p>Tamanho recomendado: 1450x500 pixels</p>
+                            <p>Formato recomendado: JPG</p>
+                        </div>
+
+                    </div>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button type="submit" class="btn btn-save-form">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card card-edit">
+            <form class="form-areas" [formGroup]="addDepoimentosForm" (ngSubmit)="addUpdadeDepoimento()">
+                <h5>Adicionar Depoimento</h5>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-topbar">
+                            <div class="card-body">
+                                <div class="row-depoimentos">
+                                    <div class="col-left">
+                                        <label for="title">Imagem</label>
+                                        <div class="image-person">
+                                            <img class="img-upload" [src]="imagemSrc" width="100%" height="290px"
+                                                alt="imagem-upload" (click)="fileUploader.click()">
+                                            <input type="file" #fileUploader accept="image/*" class="form-control"
+                                                id="avatar" aria-describedby="nome" placeholder="imagem"
+                                                (change)="showPreviewImage($event)" hidden>
+                                        </div>
+                                        <p>Tamanho recomendado: 170x170 pixels</p>
+                                        <p>Formato recomendado: JPG</p>
+                                    </div>
+                                    <div class="col-right">
+                                        <div class="row">
+                                            <div class="form-group col-lg-7">
+                                                <label for="title">Nome</label>
+                                                <input type="email" class="form-control" id="title"
+                                                    formControlName="nome">
+                                            </div>
+                                            <div class="form-group col-lg-5">
+                                                <label for="link">Função</label>
+                                                <input type="text" class="form-control" id="link"
+                                                    formControlName="funcao">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="link">Descrição</label>
+                                            <angular-editor formControlName="descricao" [config]="config">
+                                            </angular-editor>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">
+                        {{isAddMode ? 'Salvar' : 'Atualizar'}}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card card-edit">
+            <h5>Depoimentos</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Imagem</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Funçao</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let d of depoimentos">
+                            <td><img class="img-banner" [src]="d.imagem" alt="imagem-banner"></td>
+                            <td>{{d.nome}}</td>
+                            <td>{{d.funcao}}</td>
+                            <td><span [innerHTML]="d.descricao"></span></td>
+                            <td>
+                                <i class="icon-edit" tooltip="Editar" (click)="setDataDepoimento(d)"></i>
+                                <i class="icon-delete" tooltip="Excluir" (click)="openModalConfirmDelete(d)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,138 @@
+<section>
+    <div class="content-edit-footer">
+        <div class="header-title">
+            <div class="wrap">
+                <h4>Editar Rodapé</h4>
+            </div>
+        </div>
+
+        <div class="card card-edit">
+            <form class="form-footer" [formGroup]="footerForm" (ngSubmit)="addUpdateFooter()">
+                <h5>Rodapé</h5>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card card-f">
+                            <div class="title-card">
+                                <p>Logo e contatos</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="avatar">
+                                    <img class="img-upload" [src]="imagemSrc" width="100%" height="150px"
+                                        alt="imagem-upload">
+                                    <input type="file" #fileUploader accept="image/*" class="form-control" id="avatar"
+                                        aria-describedby="nome" placeholder="imagem" (change)="showPreviewImage($event)"
+                                        hidden>
+                                </div>
+                                <button type="button" class="btn btn-alter-logo" (click)="fileUploader.click()">
+                                    Alterar logo
+                                </button>
+                                <p>Tamanho recomendado: 140x90 pixels</p>
+                                <p>Formato recomendado: JPG</p>
+
+                                <div class="form-group">
+                                    <label for="number">Endereço</label>
+                                    <angular-editor formControlName="endereco" [config]="config"></angular-editor>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telefone">Telefone/Whatsapp</label>
+                                    <input type="text" class="form-control" id="telefone" formControlName="telefone" mask="(00) 0000-0000 || (00) 0 0000-0000  ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" class="form-control" id="email" formControlName="email">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-f">
+                            <div class="title-card">
+                                <p>Menu</p>
+                            </div>
+                            <div class="card-body">
+                                <ng-container formGroupName="menu">
+                                    <div class="form-group" >
+                                        <label for="facebook">Posição 1</label>
+                                        <input type="text" class="form-control" id="facebook" formControlName="menu1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="twitter">Posição 2</label>
+                                        <input type="text" class="form-control" id="twitter" formControlName="menu2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telegram">Posição 3</label>
+                                        <input type="text" class="form-control" id="telegram" formControlName="menu3">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="instagram">Posição 4</label>
+                                        <input type="text" class="form-control" id="instagram" formControlName="menu4">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="instagram">Posição 5</label>
+                                        <input type="text" class="form-control" id="instagram" formControlName="menu5">
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-f">
+                            <div class="title-card">
+                                <p>Redes sociais</p>
+                            </div>
+                            <div class="card-body">
+                                <ng-container formGroupName="redesSociais">
+                                    <div class="form-group">
+                                        <label for="number">Descrição</label>
+                                        <angular-editor formControlName="descricao" [config]="config"></angular-editor>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="facebook">Facebook</label>
+                                        <input type="text" class="form-control" id="facebook"
+                                            formControlName="facebook">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="twitter">Twitter</label>
+                                        <input type="text" class="form-control" id="twitter" formControlName="twitter">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telegram">Telegram</label>
+                                        <input type="text" class="form-control" id="telegram"
+                                            formControlName="telegram">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="instagram">Instagram</label>
+                                        <input type="text" class="form-control" id="instagram"
+                                            formControlName="instagram">
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="card card-copy">
+                            <div class="title-card">
+                                <p>Copyright</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="instagram">Copyright</label>
+                                    <input type="text" class="form-control" id="instagram" formControlName="copyright" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

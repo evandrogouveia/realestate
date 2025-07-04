@@ -1,0 +1,80 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="footer-wrapper">
+                    <h3><img [src]="footer[0]?.logo"></h3>
+
+                    <p [innerHTML]="footer[0]?.endereco"></p>
+
+                    <div class="mt-4">
+                        <a class="nav-link" href="">
+                            <i class='bx bxl-whatsapp'></i> 
+                            {{footer[0]?.telefone.length === 11 ? (footer[0]?.telefone | mask: '(00) 0 0000-0000') : (footer[0]?.telefone | mask: '(00) 0000-0000')}}
+                        </a>
+                        <a class="nav-link" href=""><i class='bx bxs-envelope'></i> {{footer[0]?.email}}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="footer-menu">
+                    <h5>Menu</h5>
+
+                    <ul class="navbar-nav ml-auto mr-3">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/home">{{footer[0]?.menu.menu1}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/quem-somos">{{footer[0]?.menu.menu2}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/propriedades">{{footer[0]?.menu.menu3}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/blog">{{footer[0]?.menu.menu4}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/contato">{{footer[0]?.menu.menu5}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="footer-socials">
+                    <h5>Redes sociais</h5>
+                    <p [innerHTML]="footer[0]?.redesSociais.descricao"></p>
+
+                    <ul class="nav">
+                        <li *ngIf="footer[0]?.redesSociais.facebook.length > 0" class="nav-item">
+                            <a class="nav-link" href="{{footer[0]?.redesSociais.facebook}}" target="_blank"><i class='bx bxl-facebook'></i></a>
+                        </li>
+                        <li *ngIf="footer[0]?.redesSociais.twitter.length > 0" class="nav-item">
+                            <a class="nav-link" href="{{footer[0]?.redesSociais.twitter}}" target="_blank"><i class="custom-icon-twitter"></i></a>
+                        </li>
+                        <li *ngIf="footer[0]?.redesSociais.telegram.length > 0" class="nav-item">
+                            <a class="nav-link" href="{{footer[0]?.redesSociais.telegram}}"target="_blank"><i class='bx bxl-telegram'></i></a>
+                        </li>
+                        <li *ngIf="footer[0]?.redesSociais.instagram.length > 0" class="nav-item">
+                            <a class="nav-link" href="{{footer[0]?.redesSociais.instagram}}" target="_blank"><i class='bx bxl-instagram'></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="texts">
+                <p>{{footer[0]?.copyright}}</p>
+                <p>Desenvolvido por: 
+                    <a href="https://mypagetecnologia.com.br/" target="_blank">
+                        <img src="assets/img/logomypage.png" width="100" height="auto" alt="logo mypage tecnologia">
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

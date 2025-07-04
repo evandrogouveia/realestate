@@ -1,0 +1,79 @@
+<div class="section-row-properties">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="t-properties text-center">
+          <h3>{{hasParams ? 'Imóveis encontrados' : home[0]?.secaoTwo.titulo}}</h3>
+          <p [innerHTML]="hasParams ? 'Melhores imóveis' : home[0]?.secaoTwo.subtitulo"></p>
+        </div>
+      </div>
+
+      <ng-container *ngIf="loading; else propertiesData">
+        <div class="col-lg-{{home[0]?.secaoTwo.gridSecao2}}" *ngFor="let p of [1,2,3,4,5,6,7,8]">
+          <span class="box-property" (click)="routerLinkId(property.ID)">
+            <div class="wrap-image">
+              <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonImage"></ngx-skeleton-loader>
+            </div>
+
+            <div class="texts loading">
+              <h5><ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonTitulo"></ngx-skeleton-loader></h5>
+              <span class="mb-4"><ngx-skeleton-loader appearance="line"
+                  [theme]="themeConfigSkeletonEndereco"></ngx-skeleton-loader></span>
+
+              <div class="property-listing d-block">
+                <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonOpcoes"></ngx-skeleton-loader>
+              </div>
+            </div>
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-template #propertiesData>
+        <div class="col-lg-{{home[0]?.secaoTwo.gridSecao2}}" *ngFor="let property of properties">
+          <span class="box-property" (click)="routerLinkId(property.ID)">
+            <div class="wrap-image">
+              <img src="{{property.imagemDestacada}}">
+            </div>
+            <div class="property-ribon">
+              <span>{{property.preco | currency: 'BRL'}}</span>
+            </div>
+            <div class="texts">
+              <h5>{{property.titulo.length >= 34 ? (property.titulo | slice:0:34) + ' ...' : property.titulo}}</h5>
+              <span><i class='bx bx-map'></i> {{property.endereco.cidade}} - {{property.endereco.uf}}</span>
+
+              <div class="property-listing">
+                <div class="wrap-icon">
+                  <i class='bx bx-hotel'></i>
+                  <span>{{property.qtdQuartos}}</span>
+                </div>
+                <div class="wrap-icon">
+                  <i class='bx bx-bath'></i>
+                  <span>{{property.qtdBanheiros}}</span>
+                </div>
+                <div class="wrap-icon">
+                  <i class='bx bx-car'></i>
+                  <span>{{property.qtdVagas}}</span>
+                </div>
+                <div class="wrap-icon">
+                  <i class='bx bx-ruler'></i>
+                  <span>{{property.areaImovel}} m²</span>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+
+        <div class="empty-properties" *ngIf="properties.length === 0">
+          Nenhum resultado foi encontrado com os filtros selecionados
+          <a class="nav-link" routerLink="/home">Voltar</a>
+        </div>
+
+      </ng-template>
+
+      <div class="col-lg-12" *ngIf="totalItems > properties.length && hasPaginator">
+        <pagination previousText="Anterior" nextText="Próximo" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems"
+          (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+    </div>
+  </div>
+</div>

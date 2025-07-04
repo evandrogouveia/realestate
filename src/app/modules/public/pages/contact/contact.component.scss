@@ -1,0 +1,117 @@
+.section-contact{
+    margin: 50px 0 0px;
+    .wrapper-form-contact{
+        width: 60%;
+        margin: 0 auto 100px;
+        p{
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #6c6c74;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        label{
+            font-family: 'Rubik', sans-serif;
+            color: #6c6c74;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input{
+            border-radius: 6px;
+            height: 45px;
+            &:focus{
+                box-shadow: none;
+                border: 1px solid var(--bg-primary-color);
+                color: var(--bg-primary-color);
+            }
+        }
+        textarea{
+            border-radius: 6px;
+            resize: none;
+            &:focus{
+                box-shadow: none;
+                border: 1px solid var(--bg-primary-color);
+                color: var(--bg-primary-color);
+            }
+        }
+        button{
+            background-color: var(--bg-primary-color);
+            font-family: 'Rubik', sans-serif;
+            margin-top: 10px;
+            border-radius: 30px;
+            width: 200px;
+            height: 45px;
+            color: var(--bg-white-color);
+            &:hover{
+                background-color: var(--bg-primary-color-hover);
+            }
+        }
+    }
+
+    .wrapper-contacts{
+        background-color: var(--bg-grey-white-color-7);
+        padding: 60px 0 55px;
+        width: 100%;
+        height: 100%;
+        .contact{
+            text-align: center;
+            i{
+                color: var(--bg-primary-color);
+                font-size: 35px;
+                margin-bottom: 10px;
+            }
+            h4{
+                font-family: "Poppins", sans-serif;
+                font-weight: 600;
+                font-size: 18px;
+                color: #6c6c74;
+                margin-bottom: 3px;
+            }
+            p{
+                color: var(--bg-secondary-color);
+                margin-bottom: 0;
+                font-size: 15px;
+                &.horary{
+                    width: 200px;
+                    margin: auto;
+                }
+            }
+
+        }
+        
+    }
+}
+.whats-icon{
+    background: url('/assets/img/icons/whatsapp.svg') no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+
+agm-map {
+    height: 400px;
+}
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px){
+    .section-contact{
+        margin-top: 20px;
+        .wrapper-form-contact{
+            width: 100%;
+            margin-bottom: 70px;
+            p{
+                text-align: justify;
+                font-size: 16px;
+            }
+            button{
+                width: 100%;
+            }
+        }
+        .wrapper-contacts{
+            padding-bottom: 30px;
+            .contact{
+                margin-bottom: 40px;
+            }
+        }
+    } 
+}

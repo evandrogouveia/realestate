@@ -1,0 +1,158 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import './assets/styles/owl-custom-styles.scss';
+@import './assets/styles/loading-styles.scss';
+@import './assets/styles/icons-svg-styles.scss';
+@import './assets/styles/angular-editor-styles.scss';
+@import './assets/boxicons-2.1.4/css/boxicons.min.css';
+@import './assets/styles/theme-color.scss';
+@import 'ngx-toastr/toastr';
+@import '@angular/cdk/overlay-prebuilt.css';
+
+
+.modal-all {
+    &.modal-dialog {
+        .content-modal {
+            font-family: "Rubik", sans-serif;
+            padding: 15px 0 15px;
+        }
+    }
+}
+
+.modal-add-user {
+    &.modal-dialog {
+        max-width: 700px;
+    }
+}
+
+.modal-add-banner {
+    &.modal-dialog {
+        max-width: 800px;
+        top: 80px;
+    }
+}
+
+.no-home {
+    header {
+        background: var(--bg-secondary-color) !important;
+    }
+}
+
+.pagination {
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.page-item .page-link:focus {
+    box-shadow: none;
+}
+
+.page-item .page-link,
+.page-link:hover {
+    color: var(--bg-primary-color);
+}
+
+.page-item.active .page-link {
+    background-color: var(--bg-primary-color);
+    border-color: var(--bg-primary-color);
+}
+
+gallery-core[thumbPosition=top] gallery-thumbs .g-slider,
+gallery-core[thumbPosition=bottom] gallery-thumbs .g-slider {
+    left: 60px !important;
+}
+
+bs-datepicker-inline-container {
+    width: 100%;
+
+    .bs-datepicker {
+        box-shadow: none;
+
+        .bs-datepicker-container {
+            padding: 0;
+            width: 100%;
+        }
+
+        .bs-media-container,
+        bs-days-calendar-view {
+            width: 100%;
+        }
+    }
+}
+
+.theme-green .bs-datepicker-head,
+.theme-green .bs-datepicker-body table td span.selected,
+.theme-green .bs-datepicker-body table td.selected span,
+.theme-green .bs-datepicker-body table td span[class*=select-]:after,
+.theme-green .bs-datepicker-body table td[class*=select-] span:after {
+    background: var(--bg-secondary-color);
+}
+.form-group {
+    input {
+        border-radius: 5px;
+
+        &:focus {
+            box-shadow: none;
+            border: 1px solid var(--bg-primary-color);
+        }
+
+        &::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: #aaaaaa;
+            font-size: 14px;
+            font-weight: 100;
+            font-family: "Rubik", sans-serif;
+        }
+
+        &::-moz-placeholder {
+            /* Firefox 19+ */
+            color: #aaaaaa;
+            font-weight: 100;
+            font-family: "Rubik", sans-serif;
+        }
+
+        &:-ms-input-placeholder {
+            /* IE 10+ */
+            color: #aaaaaa;
+            font-weight: 100;
+            font-family: "Rubik", sans-serif;
+        }
+
+        &:-moz-placeholder {
+            /* Firefox 18- */
+            color: #aaaaaa;
+            font-weight: 100;
+            font-family: "Rubik", sans-serif;
+        }
+    }
+}
+
+agm-map.internal-map {
+    height: 255px;
+    .agm-map-container-inner{
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+}
+
+
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px) {
+    .g-image-item {
+        background-size: contain !important;
+    }
+
+    .gallery-plans {
+        height: 320px;
+    }
+
+    .bs-datepicker {
+        width: 100%;
+    }
+}

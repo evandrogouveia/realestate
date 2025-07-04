@@ -1,0 +1,56 @@
+<app-entry-banner-pages [title]="'Quem somos'"></app-entry-banner-pages>
+
+<section>
+    <div class="section-about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="wrapper-image">
+                        <img [src]="quemSomos[0]?.imagem">
+
+                        <div class="text-bottom-image">
+                            <h5>{{quemSomos[0]?.textoInferior}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="wrapper-texts">
+                        <h3>{{quemSomos[0]?.titulo}}</h3>
+
+                        <p>{{quemSomos[0]?.descricao}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="about-mvv">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="wrapper-missing">
+                            <h4>{{quemSomos[0]?.coluna1.titulo}}</h4>
+                            <p [innerHTML]="quemSomos[0]?.coluna1.descricao"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="wrapper-vision mt-4">
+                            <h4>{{quemSomos[0]?.coluna2.titulo}}</h4>
+                            <p [innerHTML]="quemSomos[0]?.coluna2.descricao"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="wrapper-value mt-4">
+                            <h4>{{quemSomos[0]?.coluna3.titulo}}</h4>
+                            <p [innerHTML]="quemSomos[0]?.coluna3.descricao"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

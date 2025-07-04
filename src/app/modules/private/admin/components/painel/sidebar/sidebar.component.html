@@ -1,0 +1,119 @@
+<!-- Sidebar -->
+<div id="sidebar-wrapper" [ngClass]="retract">
+  <div class="list-group list-group-flush">
+    <div class="wrap-menu">
+      <i (click)="home.click()" class="bx bx-home"></i>
+      <a #home routerLink="/private/admin/home" routerLinkActive="active" class="list-group-item">
+        <span>Home</span>
+      </a>
+    </div>
+
+    <div class="wrap-menu">
+      <i class="bx bx-pin" (click)="toggleSidebar()"></i>
+      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedA = !isCollapsedA"
+        [attr.aria-expanded]="!isCollapsedA" aria-controls="collapsePosts" [ngClass]="{'active' : isCollapsedA}">
+        <span>Posts</span>
+        <span class="down-arrow"></span>
+      </a>
+    </div>
+    <div *ngIf="!retract" id="collapsePosts" class="collapse-menu" [collapse]="!isCollapsedA" [isAnimated]="true">
+      <a routerLink="/private/admin/list-posts" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span> Posts</span>
+      </a>
+      <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Adicionar post</span>
+      </a>
+      <a routerLink="/private/admin/add-category" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Categorias</span>
+      </a>
+    </div>
+    <div class="wrap-menu">
+      <i class="bx bx-building-house" (click)="toggleSidebar()"></i>
+      <a #properties href="javascript:void(0);" class="list-group-item" (click)="isCollapsedB = !isCollapsedB"
+      [attr.aria-expanded]="!isCollapsedB" aria-controls="collapseProperties" [ngClass]="{'active' : isCollapsedB}">
+        <span>Imóveis</span>
+        <span class="down-arrow"></span>
+      </a>
+    </div>
+    <div *ngIf="!retract" id="collapseProperties" class="collapse-menu" [collapse]="!isCollapsedB" [isAnimated]="true">
+      <a routerLink="/private/admin/list-properties" routerLinkActive="active" class="list-group-item" (click)="toggleSidebar()">
+        <span>Imóveis</span>
+      </a>
+      <a routerLink="/private/admin/add-property" routerLinkActive="active"
+        class="list-group-item" (click)="toggleSidebar()">
+        <span>Adicionar Imóvel</span>
+      </a>
+      <a routerLink="/private/admin/add-category-property" routerLinkActive="active"
+      class="list-group-item" (click)="toggleSidebar()">
+      <span>Categorias de Imóvel</span>
+    </a>
+    </div>
+
+    <div class="wrap-menu">
+      <i (click)="depoimentos.click()" class="bx bx-message-rounded"></i>
+      <a #depoimentos routerLink="/private/admin/depositions" routerLinkActive="active" class="list-group-item" (click)="toggleSidebar()">
+        <span>Depoimentos</span>
+      </a>
+    </div>
+
+    <div class="wrap-menu">
+      <i class="bx bx-user" (click)="toggleSidebar()"></i>
+      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedC = !isCollapsedC"
+        [attr.aria-expanded]="!isCollapsedC" aria-controls="collapseUsers" [ngClass]="{'active' : isCollapsedC}">
+        <span>Usuários</span>
+        <span class="down-arrow"></span>
+      </a>
+    </div>
+    <div *ngIf="!retract" id="collapseUsers" class="collapse-menu" [collapse]="!isCollapsedC" [isAnimated]="true">
+      <a routerLink="/private/admin/users" routerLinkActive="active" class="list-group-item" (click)="toggleSidebar()">
+        <span>Usuários</span>
+      </a>
+      <a routerLink="/private/admin/edit-profile/{{currentUser?.ID}}" routerLinkActive="active"
+        class="list-group-item" (click)="toggleSidebar()">
+        <span>Meu perfil</span>
+      </a>
+    </div>
+
+    <div class="wrap-menu">
+      <i class="bx bx-paint" (click)="toggleSidebar()"></i>
+      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedD = !isCollapsedD"
+        [attr.aria-expanded]="!isCollapsedD" aria-controls="collapsePersonalize" [ngClass]="{'active' : isCollapsedD}">
+        <span>Personalizar</span>
+        <span class="down-arrow"></span>
+      </a>
+    </div>
+    <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedD" [isAnimated]="true">
+     
+      <a routerLink="/private/admin/edit-theme/edit-banners" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Banners</span>
+      </a>
+      <a routerLink="/private/admin/edit-theme/edit-header" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Cabeçalho</span>
+      </a>
+      <a routerLink="/private/admin/edit-theme/edit-contact" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Contato</span>
+      </a>
+      <a routerLink="/private/admin/edit-theme/edit-home" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Home</span>
+      </a>
+      <a routerLink="/private/admin/edit-theme/edit-about" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Quem somos</span>
+      </a>
+      <a routerLink="/private/admin/edit-theme/edit-footer" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Rodapé</span>
+      </a>
+    </div>
+
+  </div>
+
+</div><!-- /#sidebar-wrapper -->
+

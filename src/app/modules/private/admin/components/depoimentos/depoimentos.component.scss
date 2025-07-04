@@ -1,0 +1,228 @@
+.content-edit-areas {
+    font-family: "Rubik", sans-serif;
+
+    .header-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+        .wrap {
+            display: flex;
+            align-items: center;
+
+            h4 {
+                margin: 0;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .card-edit {
+        padding: 20px 30px;
+        margin-bottom: 20px;
+
+        &.card-background {
+            padding: 10px;
+            
+            .wrap-background{
+                border: 1px solid rgba(0,0,0,.125);
+                margin-bottom: 10px;
+                padding: 15px;
+                border-radius: 5px;
+                label{
+                    margin: 0;
+                }
+                .image-background{
+                    width: 100%;
+                    height: 200px;
+                    position: relative;
+                    cursor: pointer;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 3px;
+                    }
+                    .box-icon-picture{
+                        position: absolute;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        text-align: center;
+                        opacity: 0;
+                        transition: all .2s;
+                        background: rgba(0,0,0,0.4);
+                        &:hover{
+                            opacity: 1;
+                        }
+                        p{
+                            cursor: pointer;
+                            font-size: 16px;
+                            color: var(--bg-white-color);
+                            margin: 0;
+                            position: relative;
+                            top: 80px;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                
+                p {
+                    margin: 5px 0;
+                    color: #999999;
+                    font-style: italic;
+                    font-weight: 100;
+                    font-size: 13px;
+                }
+            }
+        }
+
+        .form-areas {
+
+            h5 {
+                margin-bottom: 20px;
+            }
+
+            .btn-save-form {
+                background: var(--bg-primary-color);
+                color: #ffffff;
+                width: 15%;
+                border-radius: 5px;
+                transition: all 0.2s;
+                margin-top: 25px;
+                margin-bottom: 10px;
+                box-shadow: none;
+                padding: 10px 0;
+
+                &:hover {
+                    background: var(--bg-primary-color-hover);
+                }
+            }
+
+            .card {
+                .title-card {
+                    background: #f1f1f1;
+                    padding: 10px 20px;
+                    box-shadow: 1px 1px 1px 1px #eee;
+
+                    p {
+                        margin: 0;
+                    }
+                }
+
+                .form-group {
+
+                    input,
+                    textarea {
+                        border-radius: 5px;
+                        resize: none;
+
+                        &:focus {
+                            box-shadow: none;
+                            border: 1px solid var(--bg-primary-color);
+                        }
+                    }
+                }
+
+                .card-body {
+                    .row-depoimentos {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .col-left {
+                            width: 170px;
+                        }
+
+                        .col-right {
+                            width: 84%;
+                        }
+                    }
+
+                    p {
+                        margin: 5px 0;
+                        color: #999;
+                        font-style: italic;
+                        font-weight: 100;
+                        font-size: 13px;
+                    }
+
+                    .img-upload {
+                        object-fit: cover;
+                        cursor: pointer;
+                        margin-bottom: 10px;
+                        height: 160px;
+                        border-radius: 5px;
+                    }
+
+                }
+
+                &.card-topbar {
+                    min-height: 350px;
+                }
+
+            }
+        }
+
+        .table {
+            background-color: #ffffff;
+            border: 1px solid #ccd0d4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+            margin-top: 10px;
+
+            tr {
+
+                th,
+                td {
+                    &:nth-child(1) {
+                        width: 120px;
+
+                        img {
+                            width: 100%;
+                            height: 80px;
+                            object-fit: cover;
+                            border-radius: 3px;
+                        }
+                    }
+
+                    &:last-child {
+                        width: 130px;
+                        text-align: center;
+                    }
+                }
+            }
+
+            th {
+                font-weight: 500;
+                background: #f9f9f9;
+            }
+
+            td {
+                font-size: 14px;
+                color: #575757;
+                vertical-align: middle;
+
+                a {
+                    color: var(--bg-primary-color);
+                    font-weight: 500;
+                    font-size: 15px;
+
+                    &:hover {
+                        color: var(--bg-primary-color-hover);
+                    }
+                }
+
+                i {
+                    cursor: pointer;
+                }
+            }
+
+            .img-banner {
+                width: 250px;
+                height: 150px;
+            }
+
+        }
+    }
+}

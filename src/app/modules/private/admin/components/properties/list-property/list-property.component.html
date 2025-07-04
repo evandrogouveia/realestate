@@ -1,0 +1,68 @@
+<section>
+    <div class="content-list-posts">
+        <div class="header-post">
+            <div class="wrap">
+              <h4>Imóveis</h4>
+              <a class="nav-link" routerLink="/private/admin/add-property">Adicionar novo</a>
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Pesquisar imóveis">
+              <i class="icon-search"></i>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Miniatura</th>
+                    <th scope="col">IDPropriedade</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Categorias</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Data Publicação</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngIf="!loading">
+                    <tr *ngFor="let p of propriedades | filter:term">
+                      <td>
+                        <a routerLink="/private/admin/edit-posts/{{p.ID}}">
+                          <img src="{{p.imagemDestacada}}">
+                        </a>
+                      </td>
+                      <td>P-{{ p.IDPropriedade}}</td>
+                      <td><a routerLink="/private/admin/edit-posts/{{p.ID}}">{{(p.titulo.length > 40) ? (p.titulo | slice:0:40) + ' ...' : (p.titulo)}}</a></td>
+                      <td>{{ p.categorias ?  p.categorias : 'Sem categoria'}}</td>
+                      <td>{{p.preco | currency: 'BRL'}}</td>
+                      <td>{{p.dataPublicacao | date: 'dd/MM/yyyy'}}</td>
+                      <td>
+                          <a href="javascript:void(0)" (click)="duplicateItem(p)"><i class="bx bx-duplicate" tooltip="Duplicar"></i></a>
+                          <a routerLink="/private/admin/edit-property/{{p.ID}}"><i class="icon-edit" tooltip="Editar"></i></a>
+                          <a href="javascript:void(0)" (click)="openModalConfirmDelete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
+                      </td>
+                    </tr>
+                  </ng-container>
+                 
+                  <tr *ngIf="propriedades[0] && propriedades[0]?.length === 0">
+                    <td class="empty-user" colspan="7">
+                      <p>Nenhuma propriedade cadastrada</p>
+                    </td>
+                  </tr>
+                  <tr *ngIf="loading">
+                    <td class="empty-user" colspan="7">
+                      <p>Carregando propriedades...</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <pagination *ngIf="totalItems > propriedades.length" previousText="Anterior" nextText="Próximo" [totalItems]="totalItems"
+              [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)">
+              </pagination>
+        </div>
+    </div>
+</section>
+
+

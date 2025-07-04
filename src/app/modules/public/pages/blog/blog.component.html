@@ -1,0 +1,50 @@
+<app-entry-banner-pages [title]="'Blog'"></app-entry-banner-pages>
+
+<section>
+    <div class="section-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <div class="block-post" *ngFor="let p of posts$ | async">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonImage" *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
+                                <a routerLink="single-blog/{{p.ID}}">
+                                    <img src="{{p.imagemDestacada}}">
+                                </a>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="entry-header">
+                                    <a routerLink="single-blog/{{p.ID}}">
+                                        <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonTitle" *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
+                                        <h3>{{(p.titulo.length > 40) ? (p.titulo | slice:0:40) + ' ...' : (p.titulo)}}</h3>
+                                    </a>
+                                    <div class="entry-date">
+                                        <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonDate" *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
+                                        <i class='bx bx-calendar'></i>
+                                        <span>
+                                            {{p.dataPublicacao | date: 'dd'}} de 
+                                            {{p.dataPublicacao | date: 'MMMM'}} de 
+                                            {{p.dataPublicacao | date: 'YYYY'}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="entry-footer">
+                                    <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonDesc"  *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
+                                    <p [innerHTML]='(p.descricao.length > 225) ? (p.descricao | slice:0:225) + " ..." : (p.descricao)'></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <app-aside-lateral></app-aside-lateral>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>

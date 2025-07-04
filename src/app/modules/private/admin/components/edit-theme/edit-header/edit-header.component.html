@@ -1,0 +1,146 @@
+<section>
+    <div class="content-edit-header">
+        <div class="header-title">
+            <div class="wrap">
+                <h4>Editar Cabeçalho</h4>
+            </div>
+        </div>
+        <form [formGroup]="addEditHeaderForm" (ngSubmit)="submitHeader()" class="form-header">
+            <div class="card card-edit">
+
+                <h5>Topbar</h5>
+                <div class="row">
+                    <ng-container formGroupName="topBar">
+                        <div class="col-lg-6">
+                            <div class="card card-topbar">
+                                <div class="title-card">
+                                    <p>Contatos</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="email">E-mail</label>
+                                        <input type="email" class="form-control" id="email"
+                                            placeholder="ex.: email@email.com" formControlName="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="enderecoCompleto">Endereço</label>
+                                        <input type="text" class="form-control" id="enderecoCompleto"
+                                            placeholder="ex.: Avenida das amérias, 1500" name="enderecoCompleto"
+                                            formControlName="enderecoCompleto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card card-topbar">
+                                <div class="title-card">
+                                    <p>Redes sociais</p>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label for="facebook">Facebook</label>
+                                        <input type="text" class="form-control" id="facebook"
+                                            placeholder="Insira o link" formControlName="facebook">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="twitter">Twitter</label>
+                                        <input type="text" class="form-control" id="twitter" placeholder="Insira o link"
+                                            formControlName="twitter">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telegram">Telegram</label>
+                                        <input type="text" class="form-control" id="telegram"
+                                            placeholder="Insira o link" formControlName="telegram">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="instagram">Instagram</label>
+                                        <input type="text" class="form-control" id="instagram"
+                                            placeholder="Insira o link" formControlName="instagram">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">
+                        {{isAddMode ? 'Salvar' : 'Atualizar'}}
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="card card-edit">
+
+                <h5>Navbar</h5>
+
+                <div class="row" formGroupName="navBar">
+                    <div class="col-lg-4">
+                        <div class="card card-navbar">
+                            <div class="title-card">
+                                <p>Logo</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="avatar">
+                                    <img class="img-upload" [src]="logoSrc" width="100%" height="150px"
+                                        alt="imagem-upload">
+                                    <input type="file" #fileUploader accept="image/*" class="form-control" id="logo"
+                                        placeholder="imagem" (change)="showPreviewLogo($event)" hidden>
+                                </div>
+                                <button type="button" class="btn btn-alter-logo" (click)="fileUploader.click()">
+                                    Alterar logo
+                                </button>
+                                <p>Tamanho recomendado: 250x90 pixels</p>
+                                <p>Formato recomendado: PNG</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card card-navbar">
+                            <div class="title-card">
+                                <p>Menu</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="facebook">Posição 1</label>
+                                    <input type="text" class="form-control" id="facebook" placeholder="Insira o nome"
+                                        formControlName="menu1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter">Posição 2</label>
+                                    <input type="text" class="form-control" id="twitter" placeholder="Insira o nome"
+                                        formControlName="menu2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telegram">Posição 3</label>
+                                    <input type="text" class="form-control" id="telegram" placeholder="Insira o nome"
+                                        formControlName="menu3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="instagram">Posição 4</label>
+                                    <input type="text" class="form-control" id="instagram" placeholder="Insira o nome"
+                                        formControlName="menu4">
+                                </div>
+                                <div class="form-group">
+                                    <label for="instagram">Posição 5</label>
+                                    <input type="text" class="form-control" id="instagram" placeholder="Insira o nome"
+                                        formControlName="menu5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">
+                        {{isAddMode ? 'Salvar' : 'Atualizar'}}
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>

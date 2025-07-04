@@ -1,0 +1,130 @@
+<section>
+    <div class="content-edit-areas">
+        <form class="form-contacts" [formGroup]="contatoForm" (ngSubmit)="addUpdateContato()">
+            <div class="card card-edit">
+
+                <h5>Contatos</h5>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                        </div>
+                    </div>
+                    <div class="col-lg-3" *ngFor="let c of [1,2,3,4]; let i = index">
+                        <div class="card card-f">
+                            <div class="title-card">
+                                <p>Coluna {{i + 1}}</p>
+                            </div>
+                            <div class="card-body">
+                                <ng-container formGroupName="coluna{{i + 1}}">
+                                    <label>Icone</label>
+                                    <div class="btn-group" dropdown>
+                                        <button id="button-basic" dropdownToggle type="button"
+                                            class="btn btn-custom-drop dropdown-toggle" aria-controls="dropdown-basic">
+                                            <i
+                                                class="{{contatoForm.get('coluna' + c).controls['icone' + c].value}}"></i>
+                                            Selecionar <span class="caret"></span>
+                                        </button>
+                                        <div id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                                            aria-labelledby="button-basic">
+                                            <div *ngFor="let ico of icones" class="wrap-inputs-radio-hours">
+                                                <label>
+                                                    <input type="radio" name="icone{{i + 1}}" class="card-input-radio"
+                                                        [value]="ico.class" formControlName="icone{{i + 1}}">
+                                                    <div class="card-horario">
+                                                        <i class='{{ico.class}}'></i>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tituloColuna{{i + 1}}">Título</label>
+                                        <input type="text" class="form-control" id="tituloColuna{{i + 1}}"
+                                            formControlName="tituloColuna{{i + 1}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="descricaoColuna{{i + 1}}">Descrição</label>
+                                        <textarea class="form-control" id="descricaoColuna{{i + 1}}"
+                                            formControlName="descricaoColuna{{i + 1}}"></textarea>
+                                    </div>
+
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+
+            </div>
+
+            <!-- ================================ SEÇÃO MAPA ================================ -->
+            <div class="card card-edit">
+                <h5>Mapa</h5>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="title-card">
+                                <p>Insira o endereço</p>
+                            </div>
+                            <div class="card-body">
+
+                                <ng-container formGroupName="endereco">
+                                    <div class="row">
+                                       
+                                        <div class="form-group col-lg-3 mb-3">
+                                            <label for="cep" class="form-label">CEP</label>
+                                            <input type="text" class="form-control" id="cep" formControlName="cep" mask="00000-000" (blur)="getAddressViaCep()"
+                                            [ngClass]="{'is-invalid': submitted && contatoForm.controls.endereco.get('cep').errors }">
+                                         
+                                        </div>
+                                        <div class="form-group col-lg-9 mb-3">
+                                            <label for="rua" class="form-label">Rua / Av.</label>
+                                            <input type="text" class="form-control" id="rua" formControlName="rua">
+                                        </div>
+                
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-2 mb-3">
+                                            <label for="numero" class="form-label">Número</label>
+                                            <input type="text" class="form-control" id="numero" formControlName="numero">
+                                        </div>
+                                        <div class="form-group col-lg-6 mb-3">
+                                            <label for="complemento" class="form-label">Complemento</label>
+                                            <input type="text" class="form-control" id="complemento" formControlName="complemento">
+                                        </div>
+                                        <div class="form-group col-lg-4 mb-3">
+                                            <label for="bairro" class="form-label">Bairro</label>
+                                            <input type="text" class="form-control" id="complemento" formControlName="bairro">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-4 mb-5">
+                                            <label for="cidade" class="form-label">Cidade</label>
+                                            <input type="text" class="form-control" id="cidade" formControlName="cidade">
+                                        </div>
+                                        <div class="form-group col-lg-2 mb-5">
+                                            <label for="uf" class="form-label">UF</label>
+                                            <input type="text" class="form-control" id="uf" formControlName="uf">
+                                        </div>
+                                        
+                                        <div class="col-lg-6 mb-5"></div>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

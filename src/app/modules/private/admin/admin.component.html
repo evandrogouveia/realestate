@@ -1,0 +1,23 @@
+<!--div *ngIf="loading || !(usuario$ | async)?.nome" class="background-loading">
+  <img class="loading" src="assets/img/icons/loading.svg">
+</div-->
+
+<ng-container>
+  <!-- Header -->
+  <app-header></app-header>
+
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <div class="content-admin">
+        <router-outlet></router-outlet>
+      </div><!-- /content perfil -->
+
+    </div><!-- /#page-content-wrapper -->
+
+  </div><!-- /#wrapper -->
+</ng-container>

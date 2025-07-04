@@ -1,0 +1,216 @@
+<section>
+  <div class="slider-home w-100">
+    <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let b of (banners$ | async)">
+        <ng-template carouselSlide>
+          <div class="container">
+            <div class="caption-carousel">
+              <h2>{{b.titulo}}</h2>
+              <p>{{b.descricao}}</p>
+              <a [routerLink]="b.link" class="nav-link">Ver mais</a>
+            </div>
+          </div>
+          <div class="overlay">
+            <img [src]="b.imagem">
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</section>
+
+<section>
+  <div class="section-row-filter">
+    <div class="container">
+      <form class="wrap-filter" [formGroup]="filterForm" (ngSubmit)="filtrar()">
+        <div class="row">
+          <div class="col-lg-2 box-filter">
+            <div class="form-group">
+              <select class="form-control" id="estado" formControlName="estado" required>
+                <option value="" selected disabled>Estado</option>
+                <option *ngFor="let c of estados" [value]="c.sigla">{{c.nome}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2 box-filter">
+            <div class="form-group">
+              <select class="form-control" id="cidade" formControlName="cidade" required>
+                <option value="" selected disabled>Cidade</option>
+                <option *ngFor="let c of cidades" [value]="c.nome">{{c.nome}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2 box-filter">
+            <div class="form-group">
+              <select class="form-control" id="categoria" formControlName="categoria" required>
+                <option value="" selected disabled>Categoria</option>
+                <option *ngFor="let c of (categorias$ | async)" [value]="c.nome">{{c.nome}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2 box-filter">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">R$</span>
+              </div>
+              <input type="text" class="form-control price" placeholder="Preço Min." mask="separator.2" [decimalMarker]="','"
+              thousandSeparator="." [dropSpecialCharacters]="true" formControlName="precoMin">
+            </div>
+          </div>
+          <div class="col-lg-2 box-filter">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">R$</span>
+              </div>
+              <input type="text" class="form-control price" placeholder="Preço Max." mask="separator.2" [decimalMarker]="','"
+              thousandSeparator="." [dropSpecialCharacters]="true" formControlName="precoMax">
+            </div>
+          </div>
+          <div class="col-lg-2 box-filter">
+            <button type="submit" class="btn btn-filter">Buscar</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="f-service text-center">
+            <h3>{{home[0]?.secaoOne.titulo}}</h3>
+            <p [innerHTML]="home[0]?.secaoOne.subtitulo"></p>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="wrap-icons">
+            <div class="icon-circle">
+              <i class='{{home[0]?.secaoOne.coluna1.icone1}}'></i>
+            </div>
+            <h4>{{home[0]?.secaoOne.coluna1.tituloColuna1}}</h4>
+            <p [innerHTML]="home[0]?.secaoOne.coluna1.descricaoColuna1"></p>
+          </div>
+        </div>
+        
+        <div class="col-lg-3">
+          <div class="wrap-icons">
+            <div class="icon-circle">
+              <i class='{{home[0]?.secaoOne.coluna2.icone2}}'></i>
+            </div>
+            <h4>{{home[0]?.secaoOne.coluna2.tituloColuna2}}</h4>
+            <p [innerHTML]="home[0]?.secaoOne.coluna2.descricaoColuna2"></p>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="wrap-icons">
+            <div class="icon-circle">
+              <i class='{{home[0]?.secaoOne.coluna3.icone3}}'></i>
+            </div>
+            <h4>{{home[0]?.secaoOne.coluna3.tituloColuna3}}</h4>
+            <p [innerHTML]="home[0]?.secaoOne.coluna3.descricaoColuna3"></p>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="wrap-icons">
+            <div class="icon-circle">
+              <i class='{{home[0]?.secaoOne.coluna4.icone4}}'></i>
+            </div>
+            <h4>{{home[0]?.secaoOne.coluna4.tituloColuna4}}</h4>
+            <p [innerHTML]="home[0]?.secaoOne.coluna4.descricaoColuna4"></p>
+          </div>
+        </div>
+      
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <app-cards-properties [hasPaginator]="true"></app-cards-properties>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <a class="nav-link view-all" routerLink="/propriedades">Ver todas as propriedades</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div *ngIf="backgroundDepoimentos.length > 0" class="section-row-testimony" 
+    [ngStyle]="{background: 'url('+backgroundDepoimentos[0]?.background+')', backgroundSize: 'cover'}">
+
+    <div class="col-lg-12 text-center">
+      <h3>Depoimentos</h3>
+      <h2>Satisfação do nosso trabalho</h2>
+    </div>
+
+    <owl-carousel-o [options]="customOptionsTestimony">
+      <ng-container *ngFor="let d of (depoimentos$ | async)">
+        <ng-template carouselSlide>
+          <div class="container">
+            <div class="caption-carousel">
+              <p [innerHTML]="d.descricao"></p>
+            </div>
+          </div>
+          <div class="wrap-user-testimony">
+            <div class="overlay">
+              <img [src]="d.imagem">
+            </div>
+            <div>
+              <h5>{{d.nome}}</h5>
+              <p>{{d.funcao}}</p>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+      
+    </owl-carousel-o>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-row-blog">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="t-title text-center">
+            <p>{{home[0]?.secaoNoticias.titulo}}</p>
+            <h3 [innerHTML]="home[0]?.secaoNoticias.subtitulo"></h3>
+          </div>
+        </div>
+       
+        <div class="col-lg-{{home[0]?.secaoNoticias.gridNoticias}} mb-5" *ngFor="let p of (posts$ | async) | slice:0:qtdItens">
+          <div class="card">
+            <a routerLink="/blog/single-blog/{{p.ID}}" class="box-image">
+              <img class="card-img-top" src="{{p.imagemDestacada}}" alt="Card image cap">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{(p.titulo?.length > 55) ? (p.titulo | slice:0:55) + ' ...' : (p.titulo)}}
+              </h5>
+              <div class="date d-flex align-items-center">
+                <i class='bx bx-calendar'></i>
+                <span>
+                  {{p.dataPublicacao | date: 'dd'}} de
+                  {{p.dataPublicacao | date: 'MMMM'}} de
+                  {{p.dataPublicacao | date: 'YYYY'}}
+                </span>
+              </div>
+              <p class="card-text" [innerHTML]="(p.descricao?.length > 200) ? (p.descricao | slice:0:200) + ' ...' : (p.descricao)"></p>
+              <a routerLink="/blog/single-blog/{{p.ID}}" class="btn btn-readmore">
+                Ver mais
+                <i class='bx bx-chevron-right bx-sm'></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <a class="nav-link view-all" routerLink="/blog">Ver todas as notícias</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

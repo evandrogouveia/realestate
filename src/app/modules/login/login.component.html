@@ -1,0 +1,52 @@
+<div class="container-login100">
+    <div class="wrap-login100">
+        <form [formGroup]="loginForm" class="login100-form validate-form" (ngSubmit)="submitLogin()">
+            <div class="logo-top">
+                <img src="assets/img/logoipsum-invert.svg" alt="logo">
+            </div>
+
+            <div class="wrap-input100 validate-input">
+                <input 
+                    class="input100" 
+                    type="email" 
+                    name="email" 
+                    formControlName="email" 
+                    placeholder="E-mail" 
+                    autocomplete="off"
+                    required>
+                <i class='bx bx-envelope'></i>
+            </div>
+
+            <div class="wrap-input100 validate-input">
+                <input 
+                    class="input100" 
+                    type="{{type}}" 
+                    name="pass" 
+                    formControlName="senha" 
+                    placeholder="Senha"
+                    autocomplete="off"
+                    required>
+                <i class='bx bx-lock'></i>
+                <i (click)="showHidPassword()" class="icon-password" [ngClass]="{'show-pass': (show == true)}"></i>
+            </div>
+
+            <div class="container-login100-form-btn">
+                <button type="submit" class="login100-form-btn" [ngClass]="{'waiting': loading}">
+                    <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
+                    {{ loading ? 'Entrando...' : 'Entrar' }}
+                </button>
+
+                <span *ngIf="msgErro" class="msg-erro">{{msgErro}}</span>
+            </div>
+
+            <div class="flex-sb-m w-full mt-3">
+                <div class="contact100-form-recover">
+                    <a routerLink="recover-password">
+                        Esqueci a senha
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<button (click)="cadastroUsuario()">Cadastro</button>

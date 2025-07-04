@@ -1,0 +1,56 @@
+<section>
+    <div class="content-users">
+        <div class="header-users">
+            <div class="wrap">
+              <h4>Usuários</h4>
+              <a *ngIf="currentUser == 'admin'" class="nav-link" href="javascript:void(0);" (click)="openModalAddUser()">Adicionar novo</a>
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Pesquisar usuários">
+              <i class="icon-search"></i>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Nome social</th>
+                    <th scope="col">Nome completo</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Função</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let u of (users$ | async) | filter:term">
+                    <td>
+                        <div class="wrap-user">
+                            <i class="icon-person"></i>
+                            <div>
+                                <p>{{u.nomeSocial}}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{u.nomeCompleto}}</td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.tipoUsuario}}</td>
+                    <td>
+                        <a *ngIf="currentUser == 'admin' || (currentUser !== 'admin' && u.tipoUsuario !== 'admin') " routerLink="/private/admin/edit-profile/{{u.ID}}"><i class="icon-edit" tooltip="Editar"></i></a>
+                        <a *ngIf="u.tipoUsuario !== 'admin'" href="javascript:void(0);" (click)="openModalConfirmDelete(u)">
+                          <i class="icon-delete" tooltip="Remover"></i>
+                        </a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="(users$ | async)?.length === 0">
+                    <td class="empty-user" colspan="6">
+                      <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                    </td>
+                  </tr>
+                </tbody>
+                
+              </table>
+        </div>
+        
+    </div>
+</section>

@@ -1,0 +1,53 @@
+<section>
+    <div class="content-add-category">
+        <div class="header-category">
+            <div class="wrap">
+                <h4>Categorias de propriedades</h4>
+            </div>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Pesquisar categoria">
+                <i class="icon-search"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5">
+                <form [formGroup]="addCategoriasPropriedadesForm" (ngSubmit)="addUpdadeCateoriasPropriedades()">
+                    <div class="form-group">
+                      <label for="name">Nome da categoria</label>
+                      <input type="text" class="form-control" id="name" formControlName="nome">
+                    </div>
+                    <button type="submit" class="btn btn-add-category">
+                        {{ !this.isAddMode ? 'Atualizar' : 'Adicionar nova categoria'}}
+                    </button>
+                  </form>
+            </div>
+            <div class="col-lg-7">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let c of (categoriasPropriedades$ | async)">
+                                <td><span>{{c.nome}}</span></td>
+                                <td>
+                                    <i class="icon-edit" tooltip="Editar" (click)="setDataCategoriaPropriedades(c)"></i>
+                                    <i class="icon-delete" tooltip="Excluir" (click)="openModalConfirmDelete(c)"></i>
+                                </td>
+                            </tr>
+                            <tr *ngIf="(categoriasPropriedades$ | async)?.length === 0">
+                                <td class="empty-user" colspan="6">
+                                  <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                                </td>
+                              </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

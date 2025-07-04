@@ -1,0 +1,24 @@
+<div class="content-modal">
+    <div class="close">
+        <i class='bx bx-x bx-sm' (click)="bsModalRef.hide()"></i>
+    </div>
+
+    <div class="modal-body">
+        <h5 class="text-center">{{titleModal}}</h5>
+
+        <!--================================== MODAL AVISO ======================================-->
+        <ng-container *ngIf="typeModal === 'aviso'">
+            <p class="text-center">{{titlePost}}</p>
+            <div class="d-flex align-items-center justify-content-center">
+                <button (click)="bsModalRef.hide()" type="submit" class="btn btn-not-confirm">Não</button>
+                <button (click)="delete()" type="submit" class="btn btn-confirm">Sim</button>
+            </div>
+        </ng-container>
+
+        <!--================================== MODAL ADD BANNER ======================================-->
+        <ng-container *ngIf="typeModal === 'ADD_BANNER' || typeModal === 'EDIT_BANNER'">
+          <app-form-banner [dataBanner]="data"></app-form-banner>
+        </ng-container>
+
+    </div>
+</div>

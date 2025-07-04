@@ -1,0 +1,50 @@
+<section>
+    <div class="content-list-posts">
+        <div class="header-post">
+            <div class="wrap">
+              <h4>Posts</h4>
+              <a class="nav-link" routerLink="/private/admin/add-posts">Adicionar novo</a>
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Pesquisar posts">
+              <i class="icon-search"></i>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Miniatura</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Categorias</th>
+                    <th scope="col">Data de publicação</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let p of posts | filter:term">
+                    <td><img [src]="p.imagemDestacada"></td>
+                    <td><a routerLink="/private/admin/edit-posts/{{p.id}}">{{(p.titulo.length > 40) ? (p.titulo | slice:0:40) + ' ...' : (p.titulo)}}</a></td>
+                    <td>{{p.autor}}</td>
+                    <td>{{p.categorias}}</td>
+                    <td>{{p.dataPublicacao | date: 'dd/MM/yyyy'}}</td>
+                    <td>
+                        <a routerLink="/private/admin/edit-posts/{{p.ID}}"><i class="icon-edit" tooltip="Editar"></i></a>
+                        <a href="javascript:void(0)" (click)="openModalConfirmDelete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="posts?.length === 0">
+                    <td class="empty-user" colspan="6">
+                      <p>Nenhum Post cadastrado</p>
+                    </td>
+                  </tr>
+                </tbody>
+               
+              </table>
+        </div>
+        
+    </div>
+</section>
+

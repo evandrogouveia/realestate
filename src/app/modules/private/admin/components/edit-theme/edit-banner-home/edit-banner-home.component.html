@@ -1,0 +1,94 @@
+<section>
+    <div class="content-edit-banner">
+        <div class="header-title">
+            <div class="wrap">
+                <h4>Adicionar / Editar Banners Home</h4>
+            </div>
+        </div>
+
+        <div class="card card-edit">
+            <div class="card-header-banner">
+                <h5>Banners Home</h5>
+                <button type="button" class="btn btn-save-form" (click)="openModalAddBanner()">
+                    <i class='bx bx-plus'></i> Adicionar 
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Imagem</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Link</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let banner of (banners$ | async)">
+                            <td><img class="img-banner" [src]="banner.imagem" alt="imagem-banner"></td>
+                            <td>{{banner.titulo}}</td>
+                            <td>{{banner.descricao}}</td>
+                            <td>{{banner.link}}</td>
+                            <td>
+                                <i class="icon-edit" tooltip="Editar" (click)="setDataBanners(banner)"></i>
+                                <i class="icon-delete" tooltip="Excluir" (click)="openModalConfirmDelete(banner)"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf="(banners$ | async)?.length === 0">
+                            <td class="empty-user" colspan="6">
+                              <p>Nenhum banner cadastrado</p>
+                            </td>
+                          </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="card card-edit">
+            <h5>Banner Páginas</h5>
+            <form class="form-banner-pages" [formGroup]="addBannerPaginasForm" (ngSubmit)="addUpdadeBannerPaginas()">
+                <div class="table-responsive">
+                    <table class="table table-banner-pages">
+                        <thead>
+                            <tr>
+                                <th scope="col">Imagem</th>
+                                <th scope="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="check" id="check" checked>
+                                        <label class="form-check-label" for="check">Ativo</label>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="wrap-banner-pages">
+                                        <img class="img-banner-pages" [src]="imagemSrcPaginas" alt="imagem-banner">
+                                        <input type="file" #fileUploaderPaginas accept="image/*" class="form-control"
+                                            id="avatar" aria-describedby="nome" placeholder="imagem"
+                                            (change)="showPreviewImagePaginas($event)" hidden>
+                                        <div class="box-icon-picture">
+                                            <p (click)="fileUploaderPaginas.click()">Alterar imagem</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-recommended">
+                                        <p>Tamanho recomendado: 1920x750 pixels</p>
+                                        <p>/</p>
+                                        <p>Formato recomendado: JPG</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

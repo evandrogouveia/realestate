@@ -1,0 +1,227 @@
+<section>
+    <div class="content-add-property">
+        <div class="header-property mb-4">
+            <div class="wrap">
+                <h4>{{!this.isAddMode ? 'Editar Imóvel' : 'Adicionar Imóvel'}}</h4>
+            </div>
+        </div>
+
+        <form class="form-add-property" [formGroup]="addPropertyForm" (ngSubmit)="addUpdadePropriedade()">
+            <div class="row">
+                <div class="col-lg-9">
+
+                    <div class="form-group">
+                        <label for="titulo">Título <span class="obg">*</span></label>
+                        <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição <span class="obg">*</span></label>
+                        <angular-editor formControlName="descricao" [config]="config"></angular-editor>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="preco">Preço <span class="obg">*</span></label>
+                                <input type="text" class="form-control" id="preco" formControlName="preco"
+                                    mask="separator.2" [decimalMarker]="','" prefix="R$ "
+                                    [dropSpecialCharacters]="true">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="qtdQuartos">Qtd de quartos</label>
+                                <input type="text" class="form-control" id="qtdQuartos" formControlName="qtdQuartos">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="qtdBanheiros">Qtd de banheiros</label>
+                                <input type="text" class="form-control" id="qtdBanheiros"
+                                    formControlName="qtdBanheiros">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="qtdVagas">Vagas para carro</label>
+                                <input type="text" class="form-control" id="qtdVagas" formControlName="qtdVagas">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="areaImovel">Área do imóvel (m²)</label>
+                                <input type="text" class="form-control" id="areaImovel" formControlName="areaImovel">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagens">Galeria de imagens <small>(max. 10 imagens)</small></label>
+                        <div class="wrap-imagens-propriedade">
+                            <ng-container *ngFor="let img of selectedMultiplesImages; let i = index">
+                                <div *ngIf="highlightedImagesGallery[i]" class="imagens-propriedade">
+                                    <img class="img-upload" [src]="highlightedImagesGallery[i]" width="100%"
+                                        height="100%" alt="imagem-galeria-{{index}}">
+                                    <div class="wrap-remove">
+                                        <i class='bx bx-trash' (click)="removeImageGallery(i)"></i>
+                                    </div>
+                                    <input #inputGalleryImages type="file" accept="image/*" class="form-control" id="imagens"
+                                        aria-describedby="nome" placeholder="imagem" hidden multiple>
+                                </div>
+                            </ng-container>
+                            <div *ngIf="selectedMultiplesImages.length < 10" class="imagens-propriedade"
+                                (click)="fileUploaderGallery.click()">
+                                <img class="img-upload" [src]="emptyImageGallery" width="100%" height="100%"
+                                    alt="imagens-galeria">
+                                <span><i class='bx bx-plus'></i></span>
+                                <input type="file" #fileUploaderGallery accept="image/*" class="form-control"
+                                    id="imagens" aria-describedby="nome" placeholder="imagem"
+                                    (change)="showPreviewImagesGalery($event)" hidden multiple>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagens">Galeria de plantas <small>(max. 10 imagens)</small></label>
+                        <div class="wrap-imagens-propriedade">
+                            <ng-container *ngFor="let img of selectedMultiplesImagesPlantas; let i = index">
+                                <div *ngIf="highlightedImagesPlantas[i]" class="imagens-propriedade">
+                                    <img class="img-upload" [src]="highlightedImagesPlantas[i]" width="100%"
+                                        height="100%" alt="imagem-plantas-{{index}}">
+                                    <div class="wrap-remove">
+                                        <i class='bx bx-trash' (click)="removeImagePlantas(i)"></i>
+                                    </div>
+                                    <input type="file" accept="image/*" class="form-control" id="imagens"
+                                        aria-describedby="nome" placeholder="imagem" hidden multiple>
+                                </div>
+                            </ng-container>
+                            <div *ngIf="selectedMultiplesImagesPlantas.length < 10" class="imagens-propriedade"
+                                (click)="fileUploaderPlantas.click()">
+                                <img class="img-upload" [src]="emptyImagePlantas" width="100%" height="100%"
+                                    alt="imagens-galeria">
+                                <span><i class='bx bx-plus'></i></span>
+                                <input type="file" #fileUploaderPlantas accept="image/*" class="form-control"
+                                    id="imagens" aria-describedby="nome" placeholder="imagem"
+                                    (change)="showPreviewImagesPlantas($event)" hidden multiple>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagens">Vídeo <small>(Formato: MP4)</small></label>
+                        <div class="wrap-imagens-propriedade">
+                            <div class="video-propriedade">
+                                <img *ngIf="urlVideo.length === 0" class="img-upload" [src]="emptyVideo" width="100%" height="100%"
+                                    alt="imagens-galeria" (click)="fileUploaderVideo.click()">
+                                <span *ngIf="urlVideo.length === 0"><i class='bx bx-plus'></i></span>
+                                <video *ngIf="urlVideo.length > 0" [src]="urlVideo" width="100%" height="100%" controls></video>
+                                <div *ngIf="urlVideo.length > 0" class="wrap-remove">
+                                    <i class='bx bx-trash' (click)="removeVideo()"></i>
+                                </div>
+                                <input type="file" #fileUploaderVideo accept="video/mp4" class="form-control"
+                                    id="avatar" aria-describedby="nome" placeholder="imagem"
+                                    (change)="showPreviewVideo($event)" hidden>
+                            </div>
+
+                        </div>
+                    </div>
+                    <ng-container formGroupName="endereco">
+                        <div class="row">
+                            <div class="col-lg-12 mb-3">
+                                <label class="form-label">Endereço</label>
+                            </div>
+                           
+                            <div class="form-group col-lg-3 mb-3">
+                                <label for="cep" class="form-label">CEP</label>
+                                <input type="text" class="form-control" id="cep" formControlName="cep" mask="00000-000" (blur)="getAddressViaCep()"
+                                [ngClass]="{'is-invalid': submitted && addPropertyForm.controls.endereco.get('cep').errors }">
+                             
+                            </div>
+                            <div class="form-group col-lg-9 mb-3">
+                                <label for="rua" class="form-label">Rua / Av.</label>
+                                <input type="text" class="form-control" id="rua" formControlName="rua">
+                            </div>
+    
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-2 mb-3">
+                                <label for="numero" class="form-label">Número</label>
+                                <input type="text" class="form-control" id="numero" formControlName="numero">
+                            </div>
+                            <div class="form-group col-lg-6 mb-3">
+                                <label for="complemento" class="form-label">Complemento</label>
+                                <input type="text" class="form-control" id="complemento" formControlName="complemento">
+                            </div>
+                            <div class="form-group col-lg-4 mb-3">
+                                <label for="bairro" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="complemento" formControlName="bairro">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4 mb-5">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="cidade" formControlName="cidade">
+                            </div>
+                            <div class="form-group col-lg-2 mb-5">
+                                <label for="uf" class="form-label">UF</label>
+                                <input type="text" class="form-control" id="uf" formControlName="uf">
+                            </div>
+                            
+                            <div class="col-lg-6 mb-5"></div>
+                        </div>
+                    </ng-container>
+                    <div class="fixed-buttons-form">
+                        <button type="button" class="btn btn-cancel" (click)="cancelPublication()">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-save-form">
+                            <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
+                            {{!this.isAddMode && !loading ? 'Atualizar' : loading ? 'Aguarde...' : 'Publicar' }}
+                        </button>
+                    </div>
+                    
+
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group mb-5">
+                        <label for="uf" class="form-label">IDPropriedade <span class="obg">*</span></label>
+                        <input type="text" class="form-control" id="uf" formControlName="IDPropriedade"  mask="0000" prefix="P-"
+                        >
+                    </div>
+
+                    <div class="card">
+                        <div class="title-card">
+                            <p>Adicionar imagem principal</p>
+                        </div>
+                        <div class="card-body card-image">
+                            <div class="avatar">
+                                <img class="img-upload" [src]="highlightedImageDestacada" width="100%" height="200px"
+                                    alt="imagem-destacada" (click)="fileUploader.click()">
+                                <input type="file" #fileUploader accept="image/*" class="form-control" id="avatar"
+                                    aria-describedby="nome" placeholder="imagem"
+                                    (change)="showPreviewImageDestacada($event)" hidden>
+                            </div>
+                            <p>Clique sobre a imagem para substituí-la.</p>
+
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="title-card">
+                            <p>Categorias</p>
+                        </div>
+                        <div class="card-body card-category-check">
+                            <div class="form-check" *ngFor="let c of categoriasPropriedades$ | async; let i = index">
+                                <input #inputCategories type="checkbox" class="form-check-input" id="exampleCheck{{i}}"
+                                    value="{{c.nome}}" (click)="checkCategory($event)">
+                                <label class="form-check-label" for="exampleCheck{{i}}">{{c.nome}}</label>
+                            </div>
+                            <hr>
+                            <a class="nav-link" routerLink="/private/admin/add-category-property">+ Adicionar nova
+                                categoria</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

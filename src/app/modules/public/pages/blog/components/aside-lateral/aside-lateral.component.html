@@ -1,0 +1,38 @@
+<div class="aside-lateral">
+    <div class="search-blog">
+        <div class="input-group mb-3">
+            <input #search type="text" class="form-control" placeholder="Buscar"
+                (keyup.enter)="searchBlog(term)" [(ngModel)]="term">
+            <div class="input-group-append">
+                <button class="btn" type="button">
+                    <i class="bx bx-search-alt-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="entry-categoryes mt-5">
+        <h3>Categorias</h3>
+
+        <ul class="list-group list-group-flush">
+            <li *ngFor="let c of categories$ | async" class="list-group-item">
+                <a href="javascript:void(0);" (click)="filterCategory(c.nome)">{{c.nome}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="entry-recent-posts">
+        <h3>Posts recentes</h3>
+
+        <ul class="list-group list-group-flush">
+            <ng-container *ngFor="let p of posts$ | async; let i = index">
+                <li class="list-group-item" *ngIf="i < 5">
+                    <a href="javascript:void(0);" (click)="reload($event, p.ID)" class="d-flex align-items-center">
+                        <img src="{{p.imagemDestacada}}">
+                        <span [innerHTML]="(p.descricao.length > 95) ? (p.descricao | slice:0:95) + ' ...' : (p.descricao)"></span>
+                    </a>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>

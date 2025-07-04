@@ -1,0 +1,57 @@
+<div class="content-add-user">
+    <div class="modal-header">
+        <h3>Novo usuário</h3>
+        <i class='bx bx-x' (click)="bsModalRef.hide()"></i>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="addUserForm" class="form-add-user" (ngSubmit)="addUser()">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="nomeSocial">Nome social</label>
+                        <input type="text" class="form-control text-capitalize" id="nomeSocial" formControlName="nomeSocial">
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label for="nomeCompleto">Nome completo</label>
+                        <input type="text" class="form-control text-capitalize" id="nomeCompleto" formControlName="nomeCompleto">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="{{type}}" class="form-control" id="senha" formControlName="senha">
+                        <i (click)="showHidPassword()" class="icon-password"
+                        [ngClass]="{'show-pass': (show == true)}"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="tipoUsuario">Tipo de usuário</label>
+                        <select class="form-control" id="tipoUsuario" formControlName="tipoUsuario">
+                            <option value=""></option>
+                            <option value="usuario">Usuário</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="d-flex align-items-center justify-content-end">
+                <button type="submit" class="btn btn-save-form">
+                    <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
+                    {{ loading ? 'Aguarde...' : 'Adicionar'}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

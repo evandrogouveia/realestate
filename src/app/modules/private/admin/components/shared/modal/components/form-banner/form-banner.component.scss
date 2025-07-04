@@ -1,0 +1,61 @@
+.form-banner{
+          margin-top: 30px;
+    .btn-save-form{
+        background: var(--bg-primary-color);
+        color: var(--bg-white-color);
+        width: 15%;
+        border-radius: 5px;
+        transition: all 0.2s;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        box-shadow: none;
+        padding: 10px 0;
+    
+        i{
+            font-size: 20px;
+            position: relative;
+            top: 3px;
+        }
+        &:hover{
+                background:var(--bg-primary-color-hover);
+        }
+    }
+    .card{
+        .title-card{
+            background: #f1f1f1;
+            padding: 10px 20px;
+            box-shadow: 1px 1px 1px 1px #eee;
+            p{
+                margin: 0;
+            }
+        }
+        .form-group{
+            input, textarea{
+                border-radius: 5px;
+                resize: none;
+                &:focus{
+                    box-shadow: none;
+                    border:1px solid var(--bg-primary-color);
+                }
+            }
+        }
+        .card-body{
+            p{
+                margin: 5px 0;
+                color: #999;
+                font-style: italic;
+                font-weight: 100;
+            }
+            .img-upload{
+                object-fit: cover;
+                cursor: pointer;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+        }
+        &.card-topbar{
+            min-height: 350px;
+        }
+        
+    }
+}
