@@ -24,7 +24,6 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
     this.editThemeService.getAllDadosContatos().subscribe(contato => {
       this.contato = contato;
-      console.log(contato)
       this.initializeMap(contato[0].endereco);
     });
   }

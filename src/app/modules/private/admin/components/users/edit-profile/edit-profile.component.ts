@@ -40,10 +40,9 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const ID = this.route.snapshot.paramMap.get('id');
-    console.log(ID)
+
     this.currentUser$ = this.userService.getUserById(ID);
     this.currentUser$.subscribe(data => {
-      console.log(data)
       this.updateProfileForm.patchValue(data[0]);
       data[0]?.foto && data[0]?.foto !== 'undefined' ? this.imagemSrc = data[0]?.foto : this.imagemSrc = this.imagemSrc;
     });

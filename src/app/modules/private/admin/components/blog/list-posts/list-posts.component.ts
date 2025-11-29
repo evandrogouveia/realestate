@@ -29,7 +29,6 @@ export class ListPostsComponent implements OnInit {
 
   getPosts() {
     this.postService.getAllPosts().subscribe((posts: any) => {
-      console.log(posts)
       posts.map(p => p.categorias = p.categorias);
       this.posts = posts;
      })

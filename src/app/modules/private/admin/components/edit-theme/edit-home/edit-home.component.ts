@@ -71,7 +71,6 @@ export class EditHomeComponent implements OnInit {
 
   setDataForms() {
     this.editThemeService.getAllDadosHome().subscribe(data => {
-      console.log(data)
       if (data[0]) {
         this.homeForm.patchValue(data[0]);
       } else {

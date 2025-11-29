@@ -109,7 +109,7 @@ export class DepoimentosComponent implements OnInit {
 
     formData.append('background', this.selectedImageBackground);
     formData.append('formBackgroundDepoimentos', JSON.stringify(this.addBackgroundDepoimentosForm.value));
-    console.log(ID)
+
     if (ID && ID !== null) {
       this.depoimentosService.updateFundoDepoimento(ID, formData).subscribe(() => {
         this.isAddMode = true;

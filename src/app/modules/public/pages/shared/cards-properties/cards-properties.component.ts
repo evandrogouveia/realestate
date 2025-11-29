@@ -90,7 +90,6 @@ export class CardsPropertiesComponent implements OnInit {
                 return d;
               })
             ).subscribe(home => {
-      console.log(home)
       this.home = home;
     });
   }
@@ -114,7 +113,6 @@ export class CardsPropertiesComponent implements OnInit {
     this.loading = true;
     this.propriedadesService.getAllPropriedades(this.currentPage, this.itemsPerPage).pipe(
       map((d: any) => {
-        console.log(d)
           this.totalItems = d.totalItems;
         return d.results.map(item => {
           item.categorias = JSON.parse(item.categorias)

@@ -130,7 +130,7 @@ export class EditBannerHomeComponent implements OnInit {
     formData.append('formBannerPaginas', JSON.stringify(this.addBannerPaginasForm.value));
 
     if (ID) {
-      console.log(this.addBannerPaginasForm.value)
+    
       this.editThemeService.updateBannerPaginas(ID, formData).subscribe(() => {
         this.isAddMode = true;
         this.getBanners();
