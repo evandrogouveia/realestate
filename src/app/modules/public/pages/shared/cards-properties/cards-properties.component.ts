@@ -97,15 +97,15 @@ export class CardsPropertiesComponent implements OnInit {
     });
   }
 
-
-
   getPropriedadesFiltradas() {
     this.hasParams = false;
+    this.loading = true;
     this.route.queryParams.subscribe(params => {
       if (Object.keys(params).length > 0) {
         this.hasParams = true;
+
         this.filtrosService.filtroPropriedades(this.currentPage, this.itemsPerPage, params).subscribe(res => {
-    
+          this.loading = false;
           this.properties = res.results.map(item => {
 
             const dados = item;

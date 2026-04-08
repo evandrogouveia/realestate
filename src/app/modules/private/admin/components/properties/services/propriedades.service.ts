@@ -11,7 +11,6 @@ import { shareReplay } from 'rxjs/operators';
 export class PropriedadesService {
 
   private propriedadesCache$: Observable<any[]> | null = null;
-  private propriedadeIdCache$: Observable<any> | null = null;
   private categoriaPropriedadeCache$: Observable<any> | null = null;
 
   constructor(private http: HttpClient) { }
@@ -21,10 +20,7 @@ export class PropriedadesService {
     return this.http.post<any>(`${environment.API_URL}/new-propriedade`, propriedade);
   }
   getPropriedadeID(propriedadeID): Observable<Propriedades> {
-     if (!this.propriedadeIdCache$) {
-      this.propriedadeIdCache$ = this.http.get<any>(`${environment.API_URL}/propriedade/${propriedadeID}`).pipe(shareReplay(1));
-    }
-    return this.propriedadeIdCache$;
+    return this.http.get<any>(`${environment.API_URL}/propriedade/${propriedadeID}`)
   }
   getAllPropriedades(page: number, limit: number): Observable<any> {
     if (!this.propriedadesCache$) {
@@ -44,7 +40,7 @@ export class PropriedadesService {
     return this.http.post<any>(`${environment.API_URL}/new-categoria-propriedade`, categoriaPropriedade);
   }
   getAllCategoriasPropriedades(): Observable<CategoriaPropriedades> {
-     if (!this.categoriaPropriedadeCache$) {
+    if (!this.categoriaPropriedadeCache$) {
       this.categoriaPropriedadeCache$ = this.http.get<any>(`${environment.API_URL}/all-categoria-propriedades`).pipe(shareReplay(1));
     }
     return this.categoriaPropriedadeCache$;
