@@ -36,6 +36,14 @@ export class HomeComponent implements OnInit {
     precoMin: [''],
     precoMax: ['']
   });
+  loading = false;
+
+   themeConfigSkeletonImage = {
+    width: '100%',
+    height: '700px',
+    position: 'relative',
+    left: '0',
+  }
 
   constructor(
     private postsService: PostService,
@@ -46,14 +54,14 @@ export class HomeComponent implements OnInit {
     private ibgeService: IbgeService,
     private filtrosService: FiltroService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.posts$ = this.postsService.getAllPosts();
     this.banners$ = this.editThemeService.getAllBanners();
     this.depoimentos$ = this.depoimentosService.getAllDepoimentos();
     this.categorias$ = this.propriedadesService.getAllCategoriasPropriedades();
-    
+
     this.getFundoDepoimentos();
     this.getHome();
     this.getEstados();
@@ -62,22 +70,38 @@ export class HomeComponent implements OnInit {
 
   getFundoDepoimentos() {
     this.depoimentosService.getFundoDepoimentos().subscribe(fundo => {
-      if(fundo) { this.backgroundDepoimentos = fundo; }
+      if (fundo) { this.backgroundDepoimentos = fundo; }
     });
   }
 
   getHome() {
+    this.loading = true;
     this.editThemeService.getAllDadosHome().pipe(
-              map(d => {
-                d[0].secaoNoticias = JSON.parse(d[0].secaoNoticias)
-                d[0].secaoOne = JSON.parse(d[0].secaoOne)
-                d[0].secaoTwo = JSON.parse(d[0].secaoTwo)
-                return d;
-              })
-            ).subscribe(home => {
+      map(d => {
+        const item = d[0];
+
+        item.secaoNoticias = this.parseIfNeeded(item.secaoNoticias);
+        item.secaoOne = this.parseIfNeeded(item.secaoOne);
+        item.secaoTwo = this.parseIfNeeded(item.secaoTwo);
+
+        return d;
+      })
+    ).subscribe(home => {
+      this.loading = false;
       home[0].secaoNoticias.gridNoticias === '3' ? this.qtdItens = 4 : this.qtdItens = 3;
       this.home = home;
     });
+  }
+
+  parseIfNeeded(value: any) {
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    }
+    return value;
   }
 
   getEstados() {
@@ -95,7 +119,7 @@ export class HomeComponent implements OnInit {
   }
 
   filtrar() {
-    this.router.navigate(['/propriedades'], {queryParams: this.filterForm.value});
+    this.router.navigate(['/propriedades'], { queryParams: this.filterForm.value });
   }
 
   customOptions: OwlOptions = {

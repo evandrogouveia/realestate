@@ -26,7 +26,7 @@ export class CardsPropertiesComponent implements OnInit {
   currentPage: number = 1;
   @Input() itemsPerPage: number = 8;
   totalItems = 0;
-  home = [];
+  home: any = [];
   hasParams = false;
 
   themeConfigSkeletonImage = {
@@ -83,16 +83,21 @@ export class CardsPropertiesComponent implements OnInit {
 
   getDadosHome() {
     this.editThemeService.getAllDadosHome().pipe(
-              map(d => {
-                d[0].secaoNoticias = JSON.parse(d[0].secaoNoticias)
-                d[0].secaoOne = JSON.parse(d[0].secaoOne)
-                d[0].secaoTwo = JSON.parse(d[0].secaoTwo)
-                return d;
-              })
-            ).subscribe(home => {
+      map(d => {
+        const item = d[0];
+
+        item.secaoNoticias = this.parseIfNeeded(item.secaoNoticias);
+        item.secaoOne = this.parseIfNeeded(item.secaoOne);
+        item.secaoTwo = this.parseIfNeeded(item.secaoTwo);
+
+        return d;
+      })
+    ).subscribe(home => {
       this.home = home;
     });
   }
+
+
 
   getPropriedadesFiltradas() {
     this.hasParams = false;
@@ -100,7 +105,19 @@ export class CardsPropertiesComponent implements OnInit {
       if (Object.keys(params).length > 0) {
         this.hasParams = true;
         this.filtrosService.filtroPropriedades(this.currentPage, this.itemsPerPage, params).subscribe(res => {
-          this.properties = res.results;
+    
+          this.properties = res.results.map(item => {
+
+            const dados = item;
+
+            dados.categorias = this.parseIfNeeded(dados.categorias)
+            dados.endereco = this.parseIfNeeded(dados.endereco)
+            dados.imagens = this.parseIfNeeded(dados.imagens)
+            dados.plantas = this.parseIfNeeded(dados.plantas)
+            dados.video = this.parseIfNeeded(dados.video)
+            return dados;
+          });
+          
           this.totalItems = res.totalItems;
         });
       } else {
@@ -113,21 +130,22 @@ export class CardsPropertiesComponent implements OnInit {
     this.loading = true;
     this.propriedadesService.getAllPropriedades(this.currentPage, this.itemsPerPage).pipe(
       map((d: any) => {
-          this.totalItems = d.totalItems;
+        this.totalItems = d.totalItems;
         return d.results.map(item => {
-          item.categorias = JSON.parse(item.categorias)
-          item.endereco = JSON.parse(item.endereco)
-          item.imagens = JSON.parse(item.imagens)
-          item.plantas = JSON.parse(item.plantas)
-          item.video = JSON.parse(item.video)
-          return item;
-        });
 
-        
+          const dados = item;
+
+          dados.categorias = this.parseIfNeeded(dados.categorias)
+          dados.endereco = this.parseIfNeeded(dados.endereco)
+          dados.imagens = this.parseIfNeeded(dados.imagens)
+          dados.plantas = this.parseIfNeeded(dados.plantas)
+          dados.video = this.parseIfNeeded(dados.video)
+          return dados;
+        });
       })
     ).subscribe(data => {
       this.properties = data;
-   
+
       this.loading = false;
     });
   }
@@ -140,6 +158,17 @@ export class CardsPropertiesComponent implements OnInit {
 
   routerLinkId(idProperty) {
     this.router.navigate([`/propriedades/${idProperty}`]);
+  }
+
+  parseIfNeeded(value: any) {
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    }
+    return value;
   }
 
 }

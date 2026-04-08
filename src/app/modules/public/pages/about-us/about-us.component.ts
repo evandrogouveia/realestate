@@ -16,14 +16,28 @@ export class AboutUsComponent implements OnInit {
   ngOnInit(): void {
     this.editThemeService.getAllQuemSomos().pipe(
           map((d: any) => {
-            d[0].coluna1 = JSON.parse(d[0].coluna1)
-            d[0].coluna2 = JSON.parse(d[0].coluna2)
-            d[0].coluna3 = JSON.parse(d[0].coluna3)
+            const item = d[0];
+
+            item.coluna1 = this.parseIfNeeded(item.coluna1)
+            item.coluna2 = this.parseIfNeeded(item.coluna2)
+            item.coluna3 = this.parseIfNeeded(item.coluna3)
+            
             return d;
           })
         ).subscribe(data => {
       this.quemSomos = data;
     })
+  }
+
+  parseIfNeeded(value: any) {
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    }
+    return value;
   }
 
 }

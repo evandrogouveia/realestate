@@ -69,7 +69,6 @@ export class EditContactComponent implements OnInit {
 
   setDataForms() {
     this.editThemeService.getAllDadosContatos().subscribe(data => {
-      console.log(data)
       if (data[0]) {
         this.contatoForm.patchValue(data[0]);
       }

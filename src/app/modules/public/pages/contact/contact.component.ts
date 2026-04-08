@@ -15,19 +15,33 @@ export class ContactComponent implements OnInit {
   zoom: number = 15;
 
   constructor(
-    private editThemeService: EditThemeService 
-    ) { }
+    private editThemeService: EditThemeService
+  ) { }
 
   ngOnInit(): void {
     this.editThemeService.getAllDadosContatos().subscribe(contato => {
-      contato[0].coluna1 = JSON.parse(contato[0].coluna1);
-      contato[0].coluna2 = JSON.parse(contato[0].coluna2);
-      contato[0].coluna3 = JSON.parse(contato[0].coluna3);
-      contato[0].coluna4 = JSON.parse(contato[0].coluna4);
-      contato[0].endereco = JSON.parse(contato[0].endereco);
+      const item = contato[0];
+
+      item.coluna1 = this.parseIfNeeded(item.coluna1);
+      item.coluna2 = this.parseIfNeeded(item.coluna2);
+      item.coluna3 = this.parseIfNeeded(item.coluna3);
+      item.coluna4 = this.parseIfNeeded(item.coluna4);
+      item.endereco = this.parseIfNeeded(item.endereco);
+
       this.contato = contato;
       //this.initializeMap(contato[0].endereco);
     });
+  }
+
+  parseIfNeeded(value: any) {
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    }
+    return value;
   }
 
   /* INICIALIZAR DADOS DO MAPA */

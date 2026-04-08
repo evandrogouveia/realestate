@@ -34,6 +34,16 @@ export class SinglePropertyComponent implements OnInit {
 
   currentPage: number = 1;
   itemsPerPage: number = 12;
+  loading = true;
+
+  themeConfigSkeletonImage = {
+    width: '100%',
+    height: '100px',
+    position: 'relative',
+    left: '0',
+    border: '1px solid #fff',
+    display: 'block'
+  }
 
   constructor(
     //private mapsAPILoader: MapsAPILoader,
@@ -44,36 +54,43 @@ export class SinglePropertyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getAllPropriedades();
+    this.getPropriedade();
+    this.url = window.location.href;
+  }
+
+  getAllPropriedades() {
     this.properties$ = this.propriedadesService.getAllPropriedades(this.currentPage, this.itemsPerPage).pipe(
       map((d: any) => {
 
         return d.results.map(item => {
-          item.categorias = JSON.parse(item.categorias)
-          item.endereco = JSON.parse(item.endereco)
-          item.imagens = JSON.parse(item.imagens)
-          item.plantas = JSON.parse(item.plantas)
-          item.video = JSON.parse(item.video)
+
+          const dados = item;
+
+          dados.categorias = this.parseIfNeeded(dados.categorias)
+          dados.endereco = this.parseIfNeeded(dados.endereco)
+          dados.imagens = this.parseIfNeeded(dados.imagens)
+          dados.plantas = this.parseIfNeeded(dados.plantas)
+          dados.video = this.parseIfNeeded(dados.video)
+
           return item;
         });
-
-
       })
     )
-    this.url = window.location.href;
-
-    this.properties$.subscribe(res => console.log(res))
-    this.getPropriedade();
   }
 
   getPropriedade() {
     const propertyId = this.route.snapshot.paramMap.get('id');
     this.propriedadesService.getPropriedadeID(propertyId).pipe(
       map((d: any) => {
-        d[0].categorias = JSON.parse(d[0].categorias)
-        d[0].endereco = JSON.parse(d[0].endereco)
-        d[0].imagens = JSON.parse(d[0].imagens)
-        d[0].plantas = JSON.parse(d[0].plantas)
-        d[0].video = JSON.parse(d[0].video)
+        const item = d[0];
+
+        item.categorias = this.parseIfNeeded(item.categorias)
+        item.endereco = this.parseIfNeeded(item.endereco)
+        item.imagens = this.parseIfNeeded(item.imagens)
+        item.plantas = this.parseIfNeeded(item.plantas)
+        item.video = this.parseIfNeeded(item.video)
+
         return d;
       })
     ).subscribe((p: any) => {
@@ -81,7 +98,21 @@ export class SinglePropertyComponent implements OnInit {
       this.getGalleryPlans(p);
       this.propriedadeID = p;
       this.initializeMap(p[0].endereco);
+      setTimeout(() => {
+        this.loading = false;
+      }, 100);
     });
+  }
+
+  parseIfNeeded(value: any) {
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    }
+    return value;
   }
 
   /* INICIALIZAR DADOS DO MAPA */

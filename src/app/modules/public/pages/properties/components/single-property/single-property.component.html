@@ -19,7 +19,7 @@
                 <div class="col-lg-8">
                     <h2>{{propriedadeID[0]?.titulo}}</h2>
                     <p>
-                        <i class="bx bx-map"></i> 
+                        <i class="bx bx-map"></i>
                         {{propriedadeID[0]?.endereco.cidade}} - {{propriedadeID[0]?.endereco.uf}}
                     </p>
                 </div>
@@ -93,16 +93,17 @@
                 <div class="content-maps">
                     <h2>Localização</h2>
                     <p>
-                        {{propriedadeID[0]?.endereco.rua}} 
-                        {{propriedadeID[0]?.endereco.numero}}, 
+                        {{propriedadeID[0]?.endereco.rua}}
+                        {{propriedadeID[0]?.endereco.numero}},
                         {{propriedadeID[0]?.endereco.bairro}},
                         {{propriedadeID[0]?.endereco.complemento ? propriedadeID[0]?.endereco.complemento + ', ' : ''}}
-                        {{propriedadeID[0]?.endereco.cidade}} - 
+                        {{propriedadeID[0]?.endereco.cidade}} -
                         {{propriedadeID[0]?.endereco.uf}},
                         {{propriedadeID[0]?.endereco.cep | mask: '00000-000'}}
                     </p>
                     <google-map height="400px" width="100%" [center]="{ lat: lat, lng: lng }" [zoom]="zoom">
-                        <map-marker [position]="{ lat: lat, lng: lng }" [icon]="'assets/img/custom-marker.png'"></map-marker>
+                        <map-marker [position]="{ lat: lat, lng: lng }"
+                            [icon]="'assets/img/custom-marker.png'"></map-marker>
                     </google-map>
                 </div>
             </div>
@@ -162,7 +163,7 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="collumn-right">
                     <h2>Compartilhar</h2>
 
@@ -189,4 +190,3 @@
 
     </div>
 </div>
-
