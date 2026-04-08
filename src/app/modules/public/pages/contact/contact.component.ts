@@ -10,21 +10,23 @@ export class ContactComponent implements OnInit {
   contato = [];
 
   neighborhoodAndCity: string;
-  lat: number;
-  lng: number;
-  zoom: number;
-
-  private geoCoder;
+  lat: number = -22.9068;
+  lng: number = -43.1729;
+  zoom: number = 15;
 
   constructor(
-    //private mapsAPILoader: MapsAPILoader,
     private editThemeService: EditThemeService 
     ) { }
 
   ngOnInit(): void {
     this.editThemeService.getAllDadosContatos().subscribe(contato => {
+      contato[0].coluna1 = JSON.parse(contato[0].coluna1);
+      contato[0].coluna2 = JSON.parse(contato[0].coluna2);
+      contato[0].coluna3 = JSON.parse(contato[0].coluna3);
+      contato[0].coluna4 = JSON.parse(contato[0].coluna4);
+      contato[0].endereco = JSON.parse(contato[0].endereco);
       this.contato = contato;
-      this.initializeMap(contato[0].endereco);
+      //this.initializeMap(contato[0].endereco);
     });
   }
 

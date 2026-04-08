@@ -68,22 +68,9 @@
         </div>
 
         <div class="content-map">
-            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-                <ng-container *ngIf="contato.length > 0">
-                    <agm-marker 
-                    [latitude]="lat" 
-                    [longitude]="lng"
-                    [iconUrl]="'assets/img/custom-marker.png'"
-                    >
-                    <agm-info-window>
-                        <strong>
-                            Real Estate
-                        </strong>
-                      </agm-info-window>
-                </agm-marker>
-                </ng-container>
-            </agm-map>
+            <google-map height="400px" width="100%" [center]="{ lat: lat, lng: lng }" [zoom]="zoom">
+                <map-marker *ngIf="contato.length > 0" [position]="{ lat: lat, lng: lng }" [icon]="'assets/img/custom-marker.png'"></map-marker>
+            </google-map>
         </div>
-
     </div>
 </section>

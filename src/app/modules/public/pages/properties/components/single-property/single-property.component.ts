@@ -26,9 +26,9 @@ export class SinglePropertyComponent implements OnInit {
   bsInlineValue = new Date();
 
   neighborhoodAndCity: string;
-  lat: number;
-  lng: number;
-  zoom: number;
+  lat: number = -22.9068;
+  lng: number = -43.1729;
+  zoom: number = 15;
 
   private geoCoder;
 
@@ -60,6 +60,8 @@ export class SinglePropertyComponent implements OnInit {
       })
     )
     this.url = window.location.href;
+
+    this.properties$.subscribe(res => console.log(res))
     this.getPropriedade();
   }
 

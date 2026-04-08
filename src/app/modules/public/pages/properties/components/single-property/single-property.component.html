@@ -101,22 +101,9 @@
                         {{propriedadeID[0]?.endereco.uf}},
                         {{propriedadeID[0]?.endereco.cep | mask: '00000-000'}}
                     </p>
-                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-                        <ng-container *ngIf="propriedadeID.length > 0">
-                            <agm-marker 
-                            [latitude]="lat" 
-                            [longitude]="lng"
-                            [iconUrl]="'assets/img/custom-marker.png'"
-                            >
-                            <agm-info-window>
-                                <strong>
-                                    {{propriedadeID[0]?.titulo}}
-                                </strong>
-                              </agm-info-window>
-                        </agm-marker>
-                        </ng-container>
-                      
-                    </agm-map>
+                    <google-map height="400px" width="100%" [center]="{ lat: lat, lng: lng }" [zoom]="zoom">
+                        <map-marker [position]="{ lat: lat, lng: lng }" [icon]="'assets/img/custom-marker.png'"></map-marker>
+                    </google-map>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -160,7 +147,7 @@
                     <h2>Propriedades recentes</h2>
                     <div class="entry-recent-properties">
                         <ul class="list-group list-group-flush">
-                            <ng-container *ngFor="let p of (properties$ | async)?.results; let i = index">
+                            <ng-container *ngFor="let p of (properties$ | async); let i = index">
                                 <li class="list-group-item" *ngIf="i < 5">
                                     <a href="javascript:void(0);" class="d-flex align-items-center">
                                         <img src="{{p.imagemDestacada}}">
